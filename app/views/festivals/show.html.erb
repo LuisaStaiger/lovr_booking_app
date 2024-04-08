@@ -1,0 +1,14 @@
+<!-- app/views/festivals/show.html.erb -->
+
+<h1><%= @festival.name %></h1>
+<p>Location: <%= @festival.location %></p>
+<p>Dates: <%= @festival.start_date %> to <%= @festival.end_date %></p>
+
+<h2>Love Pods at this Festival</h2>
+<ul>
+  <% @festival.love_pods.each do |love_pod| %>
+    <li><%= love_pod.name %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Back to Festivals', festivals_path %>

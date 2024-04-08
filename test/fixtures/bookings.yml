@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  love_pod: one
+  booking_date: 2024-04-08
+  time_slot: MyString
+
+two:
+  user: two
+  love_pod: two
+  booking_date: 2024-04-08
+  time_slot: MyString
