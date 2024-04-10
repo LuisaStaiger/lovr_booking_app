@@ -12,3 +12,6 @@
 </ul>
 
 <%= link_to 'Back to Festivals', festivals_path %>
+<%= link_to 'Edit', edit_festival_path(@festival) %> |
+<%= link_to 'Delete', festival_path(@festival), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+
