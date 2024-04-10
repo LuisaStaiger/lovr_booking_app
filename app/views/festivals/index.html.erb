@@ -1,13 +1,13 @@
-<!-- app/views/festivals/index.html.erb -->
+<h1 class="page-title">Festivals</h1>
 
-<h1>Festivals</h1>
+<div class="festivals-list">
+  <% @festivals.each do |festival| %>
+    <div class="festival">
+      <h2 class="festival-name"><%= link_to festival.name, festival_path(festival) %></h2>
+      <p class="festival-location">Location: <%= festival.location %></p>
+      <p class="festival-dates">Dates: <%= festival.start_date %> to <%= festival.end_date %></p>
+    </div>
+  <% end %>
+</div>
 
-<% @festivals.each do |festival| %>
-  <div>
-    <h2><%= link_to festival.name, festival_path(festival) %></h2>
-    <p>Location: <%= festival.location %></p>
-    <p>Dates: <%= festival.start_date %> to <%= festival.end_date %></p>
-  </div>
-<% end %>
-
-<%= link_to 'Add a Festival', new_festival_path %>
+<%= link_to 'Add a Festival', new_festival_path, class: "button add-festival-btn" %>

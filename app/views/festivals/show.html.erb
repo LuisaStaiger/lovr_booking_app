@@ -1,17 +1,21 @@
-<!-- app/views/festivals/show.html.erb -->
+<div class="festival-details">
+  <h1 class="festival-title"><%= @festival.name %></h1>
+  <p class="festival-info"><strong>Location:</strong> <%= @festival.location %></p>
+  <p class="festival-info"><strong>Dates:</strong> <%= @festival.start_date %> to <%= @festival.end_date %></p>
 
-<h1><%= @festival.name %></h1>
-<p>Location: <%= @festival.location %></p>
-<p>Dates: <%= @festival.start_date %> to <%= @festival.end_date %></p>
-
-<h2>Love Pods at this Festival</h2>
-<ul>
-  <% @festival.love_pods.each do |love_pod| %>
-    <li><%= love_pod.name %></li>
+  <h2>Love Pods at this Festival</h2>
+  <% if @festival.love_pods.any? %>
+    <ul class="love-pods-list">
+      <% @festival.love_pods.each do |love_pod| %>
+        <li class="love-pod"><%= love_pod.name %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No Love Pods available for this festival.</p>
   <% end %>
-</ul>
+</div>
 
-<%= link_to 'Back to Festivals', festivals_path %>
-<%= link_to 'Edit', edit_festival_path(@festival) %> |
-<%= link_to 'Delete', festival_path(@festival), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-
+<div class="festival-actions">
+  <%= link_to 'Back to Festivals', festivals_path, class: 'button' %>
+  <%= link_to 'Edit', edit_festival_path(@festival), class: 'button' %>
+  <%= link_to 'Delete', festival_path(@festival), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>

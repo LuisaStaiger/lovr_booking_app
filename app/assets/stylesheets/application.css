@@ -1,15 +1,162 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
+/* Global Styles */
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #333;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+.page-title {
+  text-align: center;
+  color: #007bff;
+  margin-bottom: 40px;
+}
+
+/* Links */
+a, .back-link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover, .back-link:hover {
+  text-decoration: underline;
+}
+
+/* Buttons */
+.button, .btn {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.button:hover, .btn:hover {
+  background-color: #0056b3;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+/* Forms and Fields */
+.festival-form, .field {
+  margin-bottom: 20px;
+}
+
+.form-label, label {
+  display: block;
+  margin-bottom: .5rem;
+  font-weight: bold;
+}
+
+.form-input, input[type="text"], input[type="date"], select, textarea {
+  width: 100%;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+}
+
+/* Error Messages */
+.errors {
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #f8d7da;
+  border: 1px solid #f5c2c7;
+  color: #842029;
+  border-radius: .25rem;
+}
+
+.errors ul {
+  padding-left: 20px;
+}
+
+/* Festival List & Individual Items */
+.festivals-list .festival {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: .25rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.festival-name {
+  margin-top: 0;
+}
+
+.festival-location, .festival-dates {
+  color: #666;
+}
+
+/* Love Pods List */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  padding: 8px 0;
+}
+
+/* Adjustments for specific links */
+.add-festival-btn {
+  margin: 0 auto 30px auto;
+  display: block;
+  width: fit-content;
+}
+
+/* Festival Details Page Styles */
+.festival-details {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  margin-bottom: 20px;
+}
+
+.festival-title {
+  color: #007bff;
+  margin-bottom: 20px;
+}
+
+.festival-info {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.love-pods-list {
+  margin-top: 20px;
+}
+
+.love-pod {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 5px;
+  list-style-type: none;
+}
+
+.festival-actions {
+  text-align: center;
+}
+
+.festival-actions .button, .festival-actions .btn {
+  margin: 5px;
+}

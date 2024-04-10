@@ -1,10 +1,9 @@
-<h1>Edit Festival</h1>
+<h1 class="page-title">Edit Festival</h1>
 
-<%= form_with(model: @festival, local: true) do |form| %>
+<%= form_with(model: @festival, local: true, html: { class: 'festival-form' }) do |form| %>
   <% if @festival.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="errors">
       <h2><%= pluralize(@festival.errors.count, "error") %> prohibited this festival from being saved:</h2>
-
       <ul>
       <% @festival.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -14,28 +13,28 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :festival_name %>
+    <%= form.label :name, class: 'form-label' %>
+    <%= form.text_field :name, id: :festival_name, class: 'form-input' %>
   </div>
 
   <div class="field">
-    <%= form.label :location %>
-    <%= form.text_field :location, id: :festival_location %>
+    <%= form.label :location, class: 'form-label' %>
+    <%= form.text_field :location, id: :festival_location, class: 'form-input' %>
   </div>
 
   <div class="field">
-    <%= form.label :start_date %>
-    <%= form.date_field :start_date, id: :festival_start_date %>
+    <%= form.label :start_date, class: 'form-label' %>
+    <%= form.date_field :start_date, id: :festival_start_date, class: 'form-input' %>
   </div>
 
   <div class="field">
-    <%= form.label :end_date %>
-    <%= form.date_field :end_date, id: :festival_end_date %>
+    <%= form.label :end_date, class: 'form-label' %>
+    <%= form.date_field :end_date, id: :festival_end_date, class: 'form-input' %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Save', class: 'button' %>
   </div>
 <% end %>
 
-<%= link_to 'Back to Festivals', festivals_path %>
+<%= link_to 'Back to Festivals', festivals_path, class: 'back-link' %>
