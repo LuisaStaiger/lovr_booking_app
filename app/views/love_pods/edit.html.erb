@@ -1,0 +1,5 @@
+<h2>Editing Love Pod: <%= @love_pod.name %></h2>
+
+<%= render 'form', festival: @festival, love_pod: @love_pod %>
+
+<%= link_to 'Back to Love Pods', festival_love_pods_path(@festival) %>
