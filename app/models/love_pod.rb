@@ -3,5 +3,6 @@ class LovePod < ApplicationRecord
   has_many :bookings, dependent: :destroy
 
   validates :name, presence: true
-  # Add more validations as needed, e.g., ensuring capacity is a number greater than zero.
+  validates :description, presence: true
+  validates :capacity, numericality: { only_integer: true, greater_than: 0 }
 end

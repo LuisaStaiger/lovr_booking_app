@@ -1,4 +1,5 @@
 class FestivalsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index], if: -> { action_name == 'index' && controller_name == 'festivals' }
   before_action :set_festival, only: [:show, :edit, :update, :destroy]
 
   # GET /festivals
