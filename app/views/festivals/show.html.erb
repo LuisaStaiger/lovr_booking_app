@@ -3,17 +3,18 @@
   <p class="festival-info"><strong>Location:</strong> <%= @festival.location %></p>
   <p class="festival-info"><strong>Dates:</strong> <%= @festival.start_date %> to <%= @festival.end_date %></p>
 
-  <h2>Love Pods at this Festival</h2>
-  <% if @festival.love_pods.any? %>
-    <ul class="love-pods-list">
-      <% @festival.love_pods.each do |love_pod| %>
-        <li class="love-pod"><%= love_pod.name %></li>
-      <% end %>
-    </ul>
-  <% else %>
-    <p>No Love Pods available for this festival.</p>
-  <% end %>
-</div>
+<h2>Love Pods at this Festival</h2>
+<% if @festival.love_pods.any? %>
+  <ul class="love-pods-list">
+    <% @festival.love_pods.each do |love_pod| %>
+      <li class="love-pod">
+        <%= link_to love_pod.name, love_pod_path(love_pod), class: 'btn btn-link' %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No Love Pods available for this festival.</p>
+<% end %>
 
 <div class="festival-actions">
   <%= link_to 'Back to Festivals', festivals_path, class: 'button' %>
