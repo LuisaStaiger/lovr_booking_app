@@ -1,0 +1,39 @@
+<!-- app/views/bookings/_form.html.erb -->
+
+<%= form_with(model: [@festival, @love_pod, booking], local: true) do |form| %>
+  <% if booking.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(booking.errors.count, "error") %> prohibited this booking from being saved:</h2>
+
+      <ul>
+      <% booking.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :booking_date %>
+    <%= form.date_field :booking_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :number_of_people %>
+    <%= form.number_field :number_of_people %>
+  </div>
+
+  <div class="field">
+    <%= form.label :start_time %>
+    <%= form.time_select :start_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :duration %>
+    <%= form.select :duration, options_for_select([[25, 25], [55, 55]]) %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

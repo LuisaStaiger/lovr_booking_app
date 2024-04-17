@@ -1,7 +1,18 @@
-<h2><%= @love_pod.name %></h2>
+<h1><%= @love_pod.name %></h1>
 
-<p>Description: <%= @love_pod.description %></p>
-<p>Capacity: <%= @love_pod.capacity %></p>
+<p>
+  <strong>Description:</strong>
+  <%= @love_pod.description %>
+</p>
 
-<%= link_to 'Edit', edit_festival_love_pod_path(@festival, @love_pod) %> |
-<%= link_to 'Back to Love Pods', festival_love_pods_path(@festival) %>
+<p>
+  <strong>Capacity:</strong>
+  <%= @love_pod.capacity %>
+</p>
+
+<%= link_to 'Edit', edit_love_pod_path(@love_pod), class: 'btn btn-warning' %>
+<%= link_to 'Delete', love_pod_path(@love_pod),
+            method: :delete,
+            data: { confirm: 'Are you sure?' },
+            class: 'btn btn-danger' %>
+<%= link_to 'Back to Love Pods', love_pods_path, class: 'btn btn-link' %>

@@ -1,0 +1,11 @@
+<!-- app/views/bookings/show.html.erb -->
+
+<h2>Booking Details</h2>
+
+<p><strong>Date:</strong> <%= @booking.booking_date %></p>
+<p><strong>Time Slot:</strong> <%= @booking.start_time.strftime("%I:%M %p") %> for <%= @booking.duration %> minutes</p>
+<p><strong>Number of People:</strong> <%= @booking.number_of_people %></p>
+
+<%= link_to 'Edit Booking', edit_festival_love_pod_booking_path(@festival, @love_pod, @booking) %> |
+<%= link_to 'Cancel Booking', festival_love_pod_booking_path(@festival, @love_pod, @booking), method: :delete, data: { confirm: 'Are you sure?' } %> |
+<%= link_to 'Back to Love Pod', festival_love_pod_path(@festival, @love_pod) %>

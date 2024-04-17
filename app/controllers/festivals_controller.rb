@@ -41,8 +41,9 @@ class FestivalsController < ApplicationController
 
   # DELETE /festivals/1
   def destroy
+    @festival = Festival.find(params[:id])
     @festival.destroy
-    redirect_to festivals_url, notice: 'Festival was successfully destroyed.'
+    redirect_to festivals_path, notice: 'Festival was successfully deleted.'
   end
 
   private
@@ -51,8 +52,9 @@ class FestivalsController < ApplicationController
       @festival = Festival.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
+    # app/controllers/festivals_controller.rb
     def festival_params
-      params.require(:festival).permit(:name, :location, :start_date, :end_date)
+      params.require(:festival).permit(:name, :location, :start_date, :end_date, love_pod_ids: [])
     end
+
 end

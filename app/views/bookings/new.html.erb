@@ -1,0 +1,20 @@
+<!-- app/views/bookings/new.html.erb -->
+
+<h2>New Booking for at <%= @festival.name %></h2>
+
+<%= form_with model: [@festival, Booking.new], url: festival_bookings_path(@festival), local: true do |form| %>
+  <div class="field">
+    <%= form.label :booking_date %>
+    <%= form.date_field :booking_date, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :number_of_people %>
+    <%= form.number_field :number_of_people, min: 1, required: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Find LovePods" %>
+  </div>
+<% end %>
+

@@ -32,9 +32,15 @@
     <%= form.date_field :end_date, id: :festival_end_date, class: 'form-input' %>
   </div>
 
+  <div class="field">
+    <%= form.label :love_pods, "Select Love Pods", class: 'form-label' %>
+    <%= form.collection_select :love_pod_ids, LovePod.all, :id, :name, {}, {multiple: true, size: 10} %>
+  </div>
+
   <div class="actions">
     <%= form.submit 'Save', class: 'button' %>
   </div>
+
 <% end %>
 
 <%= link_to 'Back to Festivals', festivals_path, class: 'back-link' %>
