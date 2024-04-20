@@ -1,20 +1,27 @@
 <!-- app/views/bookings/new.html.erb -->
 
-<h2>New Booking for at <%= @festival.name %></h2>
+<h2>New Booking at <%= @festival.name %></h2>
 
-<%= form_with model: [@festival, Booking.new], url: festival_bookings_path(@festival), local: true do |form| %>
+<%= form_with url: check_availability_festival_path(@festival), method: :get, local: true do |form| %>
   <div class="field">
-    <%= form.label :booking_date %>
-    <%= form.date_field :booking_date, required: true %>
+    <%= form.label :date, "Choose a date" %>
+    <%= form.date_field :date, required: true, min: @festival.start_date, max: @festival.end_date %>
   </div>
 
   <div class="field">
-    <%= form.label :number_of_people %>
-    <%= form.number_field :number_of_people, min: 1, required: true %>
+    <%= form.label :start_time, "Start Time (HH:MM)" %>
+    <%= form.time_field :start_time, required: true, step: 300 %><!-- Step is in seconds (300s = 5 minutes) -->
   </div>
 
-  <div class="actions">
-    <%= form.submit "Find LovePods" %>
+  <div class="field">
+    <%= form.label :duration, "Duration (in minutes)" %>
+    <%= form.number_field :duration, in: 25..120, step: 5, required: true %><!-- Only allow 25 or 55 minutes for simplicity -->
   </div>
+
+  <div class="field">
+    <%= form.label :number_of_people, "Number of People" %>
+    <%= form.number_field :number_of_people, required: true %>
+  </div>
+
+  <%= form.submit "Check Availability", class: "btn btn-primary" %>
 <% end %>
-
