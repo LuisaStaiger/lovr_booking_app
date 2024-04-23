@@ -1,5 +1,4 @@
 <!-- app/views/bookings/_form.html.erb -->
-
 <%= form_with(model: [@festival, @love_pod, booking], local: true) do |form| %>
   <% if booking.errors.any? %>
     <div id="error_explanation">
@@ -16,11 +15,6 @@
   <div class="field">
     <%= form.label :booking_date %>
     <%= form.date_field :booking_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :number_of_people %>
-    <%= form.number_field :number_of_people %>
   </div>
 
   <div class="field">

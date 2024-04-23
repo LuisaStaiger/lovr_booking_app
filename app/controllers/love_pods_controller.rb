@@ -22,7 +22,6 @@ class LovePodsController < ApplicationController
     @love_pod = LovePod.find(params[:id])
   end
 
-
   def edit
   end
 

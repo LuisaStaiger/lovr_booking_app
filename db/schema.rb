@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_19_133817) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_23_110251) do
   create_table "bookings", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "love_pod_id", null: false
@@ -18,10 +18,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_19_133817) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "start_time"
-    t.integer "number_of_people"
     t.datetime "reservation_start"
     t.integer "duration"
     t.datetime "temporary"
+    t.integer "festival_id", null: false
+    t.index ["festival_id"], name: "index_bookings_on_festival_id"
     t.index ["love_pod_id"], name: "index_bookings_on_love_pod_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
@@ -65,6 +66,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_19_133817) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bookings", "festivals"
   add_foreign_key "bookings", "love_pods"
   add_foreign_key "bookings", "users"
   add_foreign_key "festival_love_pods", "festivals"

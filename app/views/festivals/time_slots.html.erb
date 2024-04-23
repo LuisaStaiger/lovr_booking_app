@@ -1,9 +1,0 @@
-<h1>Available Time Slots on <%= @date %></h1>
-<% @available_slots.each do |slot| %>
-  <%= form_with url: reserve_slot_festival_path(@festival), method: :post, local: true do |form| %>
-    <%= form.hidden_field :date, value: @date %>
-    <%= form.hidden_field :time, value: slot %>
-    <%= form.hidden_field :duration, value: @duration %>
-    <%= form.submit "Reserve this slot", class: "button" %>
-  <% end %>
-<% end %>

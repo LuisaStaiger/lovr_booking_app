@@ -6,8 +6,7 @@ class LovePod < ApplicationRecord
   validates :capacity, numericality: { only_integer: true, greater_than: 0 }
 
   # Method to check if the Love Pod is available for a given date, start time, end time, and number of people
-  def is_available_for?(date, start_time, end_time, number_of_people)
-    return false if self.capacity < number_of_people  # Check capacity first
+  def is_available_for?(date, start_time, end_time)
 
     bookings.none? do |booking|
       booking_date = booking.start_time.to_date

@@ -3,19 +3,15 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :festivals do
-    # If 'time_slots' are just viewing available slots, it can stay within festivals
-    get 'check_availability', on: :member
+    get 'check_availability', on: :member  # To view available time slots
+    post 'confirm_booking', on: :member    # To confirm a booking directly
   end
 
   resources :love_pods
 
-  # Separate routes for bookings
-  resources :bookings, only: [:new, :create, :show] do
-    collection do
-      post 'search_available_pods'  # Assuming you want to handle the pod searching separately
-    end
-  end
+  # If you don't use Booking routes for new or create actions related to festivals:
+  # You might still keep it if you want a dedicated page to show or manage bookings:
+  resources :bookings, only: [:create, :show]
 end
-
 
 
