@@ -1,0 +1,13 @@
+<%= form_with(model: @booking, local: true) do |form| %>
+  <div class="field">
+    <%= form.hidden_field :festival_id %>
+    <%= form.label :start_time %>
+    <%= form.text_field :start_time, readonly: true %>
+  </div>
+  <div class="field">
+    <%= form.label :duration, "Duration (minutes)" %>
+    <%= form.number_field :duration %>
+  </div>
+
+  <%= form.submit "Confirm Booking" %>
+<% end %>
