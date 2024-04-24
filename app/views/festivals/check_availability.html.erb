@@ -1,25 +1,26 @@
+<%# This form allows users to re-check availability without going back %>
 <%= form_with url: check_availability_festival_path(@festival), method: :get, local: true do |form| %>
   <div class="field">
     <%= form.label :date, "Select Date" %>
-    <%= form.date_field :date, min: @festival.start_date.to_s, max: @festival.end_date.to_s, required: true %>
+    <%= form.date_field :date, min: @festival.start_date.to_s, max: @festival.end_date.to_s, required: true, value: @date %>
   </div>
   <div class="field">
     <%= form.label :duration, "Duration (minutes)" %>
-    <%= form.select :duration, options_for_select([25, 55]), required: true %>
+    <%= form.select :duration, options_for_select([25, 55], @duration), required: true %>
   </div>
   <%= form.submit "Show Available Time Slots", class: 'button' %>
 <% end %>
 
+<%# Displaying the available slots %>
 <% if @available_slots.present? %>
-  <h2>Available Time Slots:</h2>
+  <h2>Available Time Slots on <%= @date %> :</h2>
   <ul>
     <% @available_slots.each do |slot| %>
       <li>
         <p>Time Slot: <%= slot %></p>
-        <%= form_with model: @booking, url: bookings_path, method: :post, local: true do |form| %>
-          <%= form.hidden_field :festival_id, value: @festival.id %>
+        <%= form_with url: festival_confirm_booking_path(@festival), method: :post, local: true do |form| %>
           <%= form.hidden_field :date, value: @date %>
-          <%= form.hidden_field :start_time, value: DateTime.parse("#{@date} #{slot.split(' - ').first}") %>
+          <%= form.hidden_field :time, value: slot.split(' - ').first %>
           <%= form.hidden_field :duration, value: @duration %>
           <%= form.submit "Confirm Booking", class: 'button' %>
         <% end %>
@@ -28,5 +29,4 @@
   </ul>
 <% else %>
   <p>No available slots for the selected date and duration.</p>
-<% end %>
-
+<% end if %>

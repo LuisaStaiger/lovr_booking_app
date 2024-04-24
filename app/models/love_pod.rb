@@ -18,3 +18,5 @@ class LovePod < ApplicationRecord
     end
   end
 end
+
+

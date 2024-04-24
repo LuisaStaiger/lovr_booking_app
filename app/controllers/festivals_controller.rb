@@ -47,12 +47,18 @@ class FestivalsController < ApplicationController
 
   # GET /festivals/1/check_availability
   def check_availability
-    @date = params[:date]
-    @duration = params[:duration].to_i
-    @available_slots = calculate_available_slots(@date, @duration)
-    render :check_availability
+    #if params[:date].blank?
+     #flash[:alert] = "Date is required."
+      #redirect_to festival_path(@festival) and return
+    #end
+
+   # @date = params[:date]
+    #@duration = params[:duration].to_i
+    #@available_slots = calculate_available_slots(@date, @duration)
+    #render :check_availability  # Make sure to have this view set up
   end
 
+  # POST /festivals/1/confirm_booking
   def confirm_booking
     @booking = @festival.bookings.build(
       start_time: DateTime.parse("#{params[:date]} #{params[:time]}"),
@@ -75,10 +81,15 @@ class FestivalsController < ApplicationController
   end
 
   def calculate_available_slots(date, duration)
-    start_time = DateTime.parse("#{date} 09:00")
-    end_time = DateTime.parse("#{date} 23:00")
-    time_slots = []
+    begin
+      start_time = DateTime.parse("#{date} 09:00")
+      end_time = DateTime.parse("#{date} 23:00")
+    rescue ArgumentError
+      flash[:alert] = "Invalid date format."
+      return []
+    end
 
+    time_slots = []
     while start_time + duration.minutes <= end_time
       if check_if_slot_available(start_time, duration)
         time_slots << "#{start_time.strftime('%H:%M')} - #{(start_time + duration.minutes).strftime('%H:%M')}"
@@ -90,7 +101,10 @@ class FestivalsController < ApplicationController
   end
 
   def check_if_slot_available(start_time, duration)
-    true # Placeholder for actual booking check logic
+    end_time = start_time + duration.minutes
+    @festival.love_pods.any? do |pod|
+      pod.is_available_for?(start_time.to_date, start_time, end_time)
+    end
   end
 
   def festival_params
