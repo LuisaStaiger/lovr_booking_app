@@ -14,7 +14,7 @@
 <% end %>
 
 <%# Displaying the available slots %>
-<% if @available_slots.present? %>
+<% if @date.present? && @duration.present? && @available_slots.present? %>
   <h2>Available Time Slots on <%= @date %> :</h2>
   <ul>
     <% @available_slots.each do |slot| %>
