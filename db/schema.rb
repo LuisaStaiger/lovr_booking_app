@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_25_123515) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_25_132429) do
   create_table "bookings", force: :cascade do |t|
     t.integer "user_id", null: false
     t.date "booking_date"
@@ -67,6 +67,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_25_123515) do
   end
 
   add_foreign_key "bookings", "festivals"
+  add_foreign_key "bookings", "love_pods"
   add_foreign_key "bookings", "users"
   add_foreign_key "festival_love_pods", "festivals"
   add_foreign_key "festival_love_pods", "love_pods"

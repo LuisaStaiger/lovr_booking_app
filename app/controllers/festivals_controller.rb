@@ -50,7 +50,11 @@ class FestivalsController < ApplicationController
     # @festival = Festival.find(params:[id])
     @date = params[:date]
     @duration = params[:duration].to_i
-    @available_slots = calculate_available_slots(@date, @duration)
+    if @date.present? && @duration.present?
+      @available_slots = calculate_available_slots(@date, @duration)
+    else
+      @available_slots = []
+    end
     render :check_availability
   end
 

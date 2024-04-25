@@ -20,9 +20,15 @@
     <% @available_slots.each do |slot| %>
       <li>
         <p>Time Slot: <%= slot %></p> <!-- Assuming 'slot' is a string or simple variable -->
+        <%#= form_with url: festival_confirm_booking_path(@festival), method: :post, local: true do |form| %>
+          <%#= form.hidden_field :date, value: @date %>
+          <%#= form.hidden_field :time, value: slot.split(' - ').first %>
+          <%#= form.hidden_field :duration, value: @duration %>
+          <%#= form.submit "Confirm Booking", class: 'button' %>
+        <%# end %>
       </li>
     <% end %>
   </ul>
 <% else %>
   <p>No available slots for the selected date and duration.</p>
-<% end if %>
+<% end %>

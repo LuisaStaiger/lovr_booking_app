@@ -11,5 +11,3 @@ Rails.application.routes.draw do
   resources :love_pods
 
 end
-
-
