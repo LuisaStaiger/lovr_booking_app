@@ -123,3 +123,5 @@ class FestivalsController < ApplicationController
     params.require(:festival).permit(:name, :location, :start_date, :end_date, love_pod_ids: [])
   end
 end
+
+# just to push
