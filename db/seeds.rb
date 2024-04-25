@@ -10,8 +10,8 @@
 
 User.destroy_all
 
-admin = User.create!(email: "admin@mail.com", password: "123456", admin: true)
-user = User.create!(email: "user@mail.com", password: "123456")
+User.create!(email: "admin@mail.com", password: "123456", admin: true)
+User.create!(email: "user@mail.com", password: "123456")
 
 # Create Festivals
 festival1 = Festival.create!(name: "Summer Music Fest", location: "Central Park", start_date: Date.new(2024, 6, 10), end_date: Date.new(2024, 6, 12))
