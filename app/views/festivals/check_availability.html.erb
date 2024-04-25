@@ -14,17 +14,15 @@
 <% end %>
 
 <%# Displaying the available slots %>
-<% if @available_slots.present? %>
+<% if @date.present? && @duration.present? && @available_slots.present? %>
   <h2>Available Time Slots on <%= @date %> :</h2>
   <ul>
     <% @available_slots.each do |slot| %>
       <li>
-        <p>Time Slot: <%= slot %></p> <!-- Assuming 'slot' is a string or simple variable -->
+        <p>Time Slot: <%= slot %></p>
       </li>
     <% end %>
   </ul>
-<% else %>
+<% elsif @date.present? && @duration.present? %>
   <p>No available slots for the selected date and duration.</p>
-<% end if %>
-
-
+<% end %>

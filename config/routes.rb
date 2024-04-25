@@ -5,11 +5,10 @@ Rails.application.routes.draw do
   resources :festivals do
     resources :bookings, only: [:new, :create, :show]
     get 'check_availability', on: :member  # To view available time slots
-    post 'confirm_booking', on: :member    # To confirm a booking directly
+    # post 'confirm_booking', on: :member    # To confirm a booking directly
+
   end
 
   resources :love_pods
 
 end
-
-
