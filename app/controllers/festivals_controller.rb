@@ -50,40 +50,14 @@ class FestivalsController < ApplicationController
     # @festival = Festival.find(params:[id])
     @date = params[:date]
     @duration = params[:duration].to_i
-    @available_slots = calculate_available_slots(@date, @duration)
-    render :check_availability
-  end
-
-  def check_availability
-    @festival = Festival.find(params[:id])
-    @date = params[:date]
-    @duration = params[:duration].to_i
     if @date.present? && @duration.present?
       @available_slots = calculate_available_slots(@date, @duration)
+      create_available_slot_instances(@available_slots)
     else
       @available_slots = []
     end
-
     render :check_availability
   end
-
-
-
-  # # POST /festivals/1/confirm_booking
-  # def confirm_booking
-  #   @booking = @festival.bookings.build(
-  #     start_time: DateTime.parse("#{params[:date]} #{params[:time]}"),
-  #     duration: params[:duration].to_i,
-  #     user_id: current_user.id
-  #   )
-
-  #   if @booking.save
-  #     redirect_to booking_path(@booking), notice: 'Booking was successfully created.'
-  #   else
-  #     flash[:alert] = 'Failed to create booking.'
-  #     render :check_availability
-  #   end
-  # end
 
   private
 
@@ -118,10 +92,14 @@ class FestivalsController < ApplicationController
     end
   end
 
+  def create_available_slot_instances(available_slots)
+    available_slots.each do |slot|
+      AvailableSlot.create(date: @date, time_frame: slot, duration: @duration, festival: @festival)
+      end
+  end
+
 
   def festival_params
     params.require(:festival).permit(:name, :location, :start_date, :end_date, love_pod_ids: [])
   end
 end
-
-# just to push

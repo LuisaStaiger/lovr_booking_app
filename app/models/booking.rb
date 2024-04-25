@@ -1,7 +1,8 @@
 class Booking < ApplicationRecord
   belongs_to :user
   belongs_to :love_pod
-  validates :date, :start_time, :duration, presence: true
+  belongs_to :festival
+  validates :booking_date, :time_frame, :duration, presence: true
 
   enum status: {
     pending: 0,

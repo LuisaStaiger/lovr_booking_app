@@ -10,11 +10,11 @@ class LovePod < ApplicationRecord
   # Method to check if the Love Pod is available for a given date, start time, end time
   def is_available_for?(date, start_time, end_time)
     bookings.none? do |booking|
-      booking_date = booking.start_time.to_date
+      booking_date = booking.time_frame.to_date
       # Check if the booking overlaps in date and time
-      booking_end_time = booking.start_time + booking.duration.minutes
+      booking_end_time = booking.time_frame + booking.duration.minutes
       date == booking_date && (
-        (start_time...end_time).overlaps?(booking.start_time...booking_end_time)
+        (time_frame...end_time).overlaps?(booking.time_frame...booking_end_time)
       )
     end
   end
