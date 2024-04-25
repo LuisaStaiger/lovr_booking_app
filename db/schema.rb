@@ -10,18 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_25_132429) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_25_214620) do
+  create_table "available_slots", force: :cascade do |t|
+    t.datetime "date"
+    t.string "time_frame"
+    t.integer "duration"
+    t.integer "festival_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["festival_id"], name: "index_available_slots_on_festival_id"
+  end
+
   create_table "bookings", force: :cascade do |t|
     t.integer "user_id", null: false
     t.date "booking_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "start_time"
-    t.datetime "reservation_start"
     t.integer "duration"
     t.integer "status", default: 0
     t.integer "festival_id"
     t.integer "love_pod_id"
+    t.datetime "time_frame"
     t.index ["festival_id"], name: "index_bookings_on_festival_id"
     t.index ["love_pod_id"], name: "index_bookings_on_love_pod_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
@@ -66,6 +75,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_25_132429) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "available_slots", "festivals"
   add_foreign_key "bookings", "festivals"
   add_foreign_key "bookings", "love_pods"
   add_foreign_key "bookings", "users"

@@ -3,10 +3,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :festivals do
+    get 'check_availability', on: :member do  # To view available time slots
+      # post 'confirm_booking', on: :member    # To confirm a booking directly
+    end
     resources :bookings, only: [:new, :create, :show]
-    get 'check_availability', on: :member  # To view available time slots
-    # post 'confirm_booking', on: :member    # To confirm a booking directly
-
   end
 
   resources :love_pods
