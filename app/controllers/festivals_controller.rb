@@ -1,6 +1,6 @@
 class FestivalsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index], if: -> { action_name == 'index' && controller_name == 'festivals' }
-  before_action :set_festival, only: [:show, :edit, :update, :destroy, :check_availability, :confirm_booking]
+  before_action :set_festival, only: [:show, :edit, :update, :destroy, :check_availability]
 
   # GET /festivals
   def index
@@ -47,32 +47,28 @@ class FestivalsController < ApplicationController
 
   # GET /festivals/1/check_availability
   def check_availability
-    #if params[:date].blank?
-     #flash[:alert] = "Date is required."
-      #redirect_to festival_path(@festival) and return
-    #end
-
-   # @date = params[:date]
-    #@duration = params[:duration].to_i
-    #@available_slots = calculate_available_slots(@date, @duration)
-    #render :check_availability  # Make sure to have this view set up
+    # @festival = Festival.find(params:[id])
+    @date = params[:date]
+    @duration = params[:duration].to_i
+    @available_slots = calculate_available_slots(@date, @duration)
+    render :check_availability
   end
 
-  # POST /festivals/1/confirm_booking
-  def confirm_booking
-    @booking = @festival.bookings.build(
-      start_time: DateTime.parse("#{params[:date]} #{params[:time]}"),
-      duration: params[:duration].to_i,
-      user_id: current_user.id
-    )
+  # # POST /festivals/1/confirm_booking
+  # def confirm_booking
+  #   @booking = @festival.bookings.build(
+  #     start_time: DateTime.parse("#{params[:date]} #{params[:time]}"),
+  #     duration: params[:duration].to_i,
+  #     user_id: current_user.id
+  #   )
 
-    if @booking.save
-      redirect_to booking_path(@booking), notice: 'Booking was successfully created.'
-    else
-      flash[:alert] = 'Failed to create booking.'
-      render :check_availability
-    end
-  end
+  #   if @booking.save
+  #     redirect_to booking_path(@booking), notice: 'Booking was successfully created.'
+  #   else
+  #     flash[:alert] = 'Failed to create booking.'
+  #     render :check_availability
+  #   end
+  # end
 
   private
 
@@ -106,6 +102,7 @@ class FestivalsController < ApplicationController
       pod.is_available_for?(start_time.to_date, start_time, end_time)
     end
   end
+
 
   def festival_params
     params.require(:festival).permit(:name, :location, :start_date, :end_date, love_pod_ids: [])
