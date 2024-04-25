@@ -54,6 +54,21 @@ class FestivalsController < ApplicationController
     render :check_availability
   end
 
+  def check_availability
+    @festival = Festival.find(params[:id])
+    @date = params[:date]
+    @duration = params[:duration].to_i
+    if @date.present? && @duration.present?
+      @available_slots = calculate_available_slots(@date, @duration)
+    else
+      @available_slots = []
+    end
+
+    render :check_availability
+  end
+
+
+
   # # POST /festivals/1/confirm_booking
   # def confirm_booking
   #   @booking = @festival.bookings.build(
