@@ -1,3 +1,5 @@
+<p>just checking if something shows up.</p>
+
 <%# This form allows users to re-check availability without going back %>
 <%= form_with url: check_availability_festival_path(@festival), method: :get, local: true do |form| %>
   <div class="field">
@@ -17,16 +19,12 @@
   <ul>
     <% @available_slots.each do |slot| %>
       <li>
-        <p>Time Slot: <%= slot %></p>
-        <%= form_with url: festival_confirm_booking_path(@festival), method: :post, local: true do |form| %>
-          <%= form.hidden_field :date, value: @date %>
-          <%= form.hidden_field :time, value: slot.split(' - ').first %>
-          <%= form.hidden_field :duration, value: @duration %>
-          <%= form.submit "Confirm Booking", class: 'button' %>
-        <% end %>
+        <p>Time Slot: <%= slot %></p> <!-- Assuming 'slot' is a string or simple variable -->
       </li>
     <% end %>
   </ul>
 <% else %>
   <p>No available slots for the selected date and duration.</p>
 <% end if %>
+
+
