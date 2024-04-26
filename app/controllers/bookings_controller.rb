@@ -13,14 +13,15 @@ class BookingsController < ApplicationController
     @festival = Festival.find(params[:festival_id]) if params[:festival_id]
     @booking.festival = @festival
     @booking.duration = params[:duration]
-    @booking.time_frame = params[:time_frame]
+    @booking.start_time = params[:start_time]
     @booking.user = current_user
     @booking.booking_date = params[:booking_date]
     @love_pod = LovePod.find(params[:festival_id])
     @booking.love_pod = @love_pod
-    raise
     if @booking.save
-      redirect_to booking_path(@booking), notice: 'Booking was successfully created.'
+      # redirect_to booking_path(@booking), notice: 'Booking was successfully created.'
+      flash.now[:alert] =  'Booking was successfully created.'
+      redirect_to check_availability_festival_path(@booking.festival)
     else
       flash.now[:alert] = 'Failed to create booking: ' + @booking.errors.full_messages.to_sentence
       redirect_to check_availability_festival_path(@festival)
@@ -58,6 +59,6 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:festival_id, :love_pod_id, :time_frame, :duration, :booking_date)
+    params.require(:booking).permit(:festival_id, :love_pod_id, :start_time, :duration, :booking_date)
   end
 end
