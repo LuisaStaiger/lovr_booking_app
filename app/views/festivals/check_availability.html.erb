@@ -1,5 +1,3 @@
-<p>just checking if something shows up.</p>
-
 <%# This form allows users to re-check availability without going back %>
 <%= form_with url: check_availability_festival_path(@festival), method: :get, local: true do |form| %>
   <div class="field">
@@ -20,16 +18,9 @@
     <% @available_slots.each_with_index do |slot, index| %>
       <li>
         <p>Time Slot: <%= slot %></p>
-        <%#= simple_form_for [@festival] do |f| %>
-          <%#= form.hidden_field :date, value: @date %>
-          <%#= form.hidden_field :time, value: slot.split(' - ').first %>
-          <%#= form.hidden_field :duration, value: @duration %>
-<!--        <a class="fun-btn"><%#= f.button :submit %></a>-->
-        <%# end %>
-        <!-- Assuming 'slot' is a string or simple variable -->
         <%= form_with url: festival_bookings_path(@festival, @booking), method: :post, local: true do |form| %>
           <%= form.hidden_field :booking_date, value: @date %>
-          <%= form.hidden_field :time_frame, value: slot.split(' - ').first %>
+          <%= form.hidden_field :start_time, value: DateTime.parse(slot) %>
           <%= form.hidden_field :duration, value: @duration %>
           <%= form.submit "Confirm Booking", class: 'button' %>
         <% end %>
