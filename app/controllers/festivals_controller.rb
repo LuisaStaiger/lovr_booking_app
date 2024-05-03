@@ -53,6 +53,7 @@ class FestivalsController < ApplicationController
     if @date.present? && @duration.present?
       @available_slots = calculate_available_slots(@date, @duration)
       create_available_slot_instances(@available_slots)
+      raise
     else
       @available_slots = []
     end
@@ -92,10 +93,26 @@ class FestivalsController < ApplicationController
     end
   end
 
+  # def check_if_slot_available(start_time, duration)
+  #   end_time = start_time + duration.minutes
+  #   @festival.available_slots.any? do |slot|
+  #     slot.is_available_for?(start_time.to_date, start_time, end_time)
+  #   end
+  # end
+
   def create_available_slot_instances(available_slots)
     available_slots.each do |slot|
-      AvailableSlot.create(date: @date, time_frame: slot, duration: @duration, festival: @festival)
+      AvailableSlot.new(date: @date, time_frame: slot,
+      start_time: DateTime.parse(slot), duration: @duration, festival: @festival,
+      love_pod: find_free_pods)
+    end
+  end
+
+  def find_free_pods
+    @festival.love_pods.find do |pod|
+      unless pod.available_slots.exists?
       end
+    end
   end
 
   def festival_params
