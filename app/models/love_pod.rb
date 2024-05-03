@@ -1,10 +1,10 @@
 class LovePod < ApplicationRecord
-  has_many :bookings, dependent: :destroy
+  has_many :available_slots, dependent: :destroy
   has_many :festival_love_pods
   has_many :festivals, through: :festival_love_pods
+  has_many :bookings, through: :available_slots
 
-  validates :name, presence: true
-  validates :description, presence: true
+  validates :name, :description, presence: true
   validates :capacity, numericality: { only_integer: true, greater_than: 0 }
 
   # Method to check if the Love Pod is available for a given date, start time, end time
