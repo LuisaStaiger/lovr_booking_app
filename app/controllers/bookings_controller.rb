@@ -28,13 +28,13 @@ class BookingsController < ApplicationController
     end
   end
 
-  def show
-    @booking = Booking.find(params[:id])
-  end
+  # def show
+  #   @booking = Booking.find(params[:id])
+  # end
 
-  def index
-    @bookings = @festival.bookings if @festival
-  end
+  # def index
+  #   @bookings = @festival.bookings if @festival
+  # end
 
   # # POST /festivals/1/confirm_booking
   # def confirm_booking
