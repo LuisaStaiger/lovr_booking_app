@@ -110,8 +110,7 @@ class FestivalsController < ApplicationController
 
   def find_free_pods
     @festival.love_pods.find do |pod|
-      unless pod.available_slots.exists?
-      end
+      pod.available_slots.exists?
     end
   end
 
