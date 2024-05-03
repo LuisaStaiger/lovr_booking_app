@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_festival, only: [:create]
+  before_action :set_festival, only: [:create, :index, :show]
   before_action :set_love_pod, only: [:create]
 
   def create
@@ -20,6 +20,7 @@ class BookingsController < ApplicationController
     @booking.love_pod = @love_pod
     raise
     if @booking.save
+      
       # redirect_to booking_path(@booking), notice: 'Booking was successfully created.'
       flash.now[:alert] =  'Booking was successfully created.'
       redirect_to check_availability_festival_path(@booking.festival)
@@ -29,9 +30,13 @@ class BookingsController < ApplicationController
     end
   end
 
-  def show
-    @booking = Booking.find(params[:id])
-  end
+  # def show
+  #   @booking = Booking.find(params[:id])
+  # end
+
+  # def index
+  #   @bookings = @festival.bookings if @festival
+  # end
 
   # # POST /festivals/1/confirm_booking
   # def confirm_booking
@@ -49,6 +54,7 @@ class BookingsController < ApplicationController
   #   end
   # end
 
+
   private
 
   def set_festival
@@ -56,7 +62,7 @@ class BookingsController < ApplicationController
   end
 
   def set_love_pod
-    @love_pod = FestivalLovePod.find(params[:festival_id]) if params[:festival_id]
+    @love_pod = LovePod.find(params[:love_pod_id]) if params[:love_pod_id]
   end
 
   def booking_params

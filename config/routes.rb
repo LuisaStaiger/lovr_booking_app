@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root "festivals#index"
   devise_for :users
 
+  get 'my_bookings', to: 'user_bookings#index', as: 'user_bookings'
   resources :festivals do
     get 'check_availability', on: :member do  # To view available time slots
       # post 'confirm_booking', on: :member    # To confirm a booking directly
@@ -9,6 +10,6 @@ Rails.application.routes.draw do
     resources :bookings, only: [:new, :create, :show]
   end
 
-  resources :love_pods, only: [:new, :create, :show, :edit, :update, :destroy]
+  resources :love_pods
   resources :bookings, only: [:destroy]
 end
