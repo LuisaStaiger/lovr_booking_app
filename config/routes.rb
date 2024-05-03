@@ -9,6 +9,6 @@ Rails.application.routes.draw do
     resources :bookings, only: [:new, :create, :show]
   end
 
-  resources :love_pods
-
+  resources :love_pods, only: [:new, :create, :show, :edit, :update, :destroy]
+  resources :bookings, only: [:destroy]
 end

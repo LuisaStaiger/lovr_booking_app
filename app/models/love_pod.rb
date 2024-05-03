@@ -2,6 +2,7 @@ class LovePod < ApplicationRecord
   has_many :bookings, dependent: :destroy
   has_many :festival_love_pods
   has_many :festivals, through: :festival_love_pods
+  has_many :love_pods
 
   validates :name, presence: true
   validates :description, presence: true

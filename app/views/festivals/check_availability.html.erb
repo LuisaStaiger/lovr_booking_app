@@ -18,7 +18,7 @@
     <% @available_slots.each_with_index do |slot, index| %>
       <li>
         <p>Time Slot: <%= slot %></p>
-        <%= form_with url: festival_bookings_path(@festival, @booking), method: :post, local: true do |form| %>
+        <%= form_with url: festival_bookings_path(@festival, @booking, @available_slot), method: :post, local: true do |form| %>
           <%= form.hidden_field :booking_date, value: @date %>
           <%= form.hidden_field :start_time, value: DateTime.parse(slot) %>
           <%= form.hidden_field :duration, value: @duration %>

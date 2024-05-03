@@ -18,6 +18,7 @@ class BookingsController < ApplicationController
     @booking.booking_date = params[:booking_date]
     @love_pod = LovePod.find(params[:festival_id])
     @booking.love_pod = @love_pod
+    raise
     if @booking.save
       # redirect_to booking_path(@booking), notice: 'Booking was successfully created.'
       flash.now[:alert] =  'Booking was successfully created.'

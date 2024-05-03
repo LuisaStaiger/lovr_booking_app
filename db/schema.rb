@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_26_102635) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_26_131650) do
   create_table "available_slots", force: :cascade do |t|
     t.datetime "date"
     t.string "time_frame"
@@ -18,7 +18,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_26_102635) do
     t.integer "festival_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "love_pod_id"
     t.index ["festival_id"], name: "index_available_slots_on_festival_id"
+    t.index ["love_pod_id"], name: "index_available_slots_on_love_pod_id"
   end
 
   create_table "bookings", force: :cascade do |t|
@@ -76,6 +78,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_26_102635) do
   end
 
   add_foreign_key "available_slots", "festivals"
+  add_foreign_key "available_slots", "love_pods"
   add_foreign_key "bookings", "festivals"
   add_foreign_key "bookings", "love_pods"
   add_foreign_key "bookings", "users"
