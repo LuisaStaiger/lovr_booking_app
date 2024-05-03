@@ -1,0 +1,22 @@
+<!-- app/views/user_bookings/index.html.erb -->
+<h1>My Bookings</h1>
+
+<ul>
+  <% @bookings.each do |booking| %>
+    <li>
+      <strong>Festival:</strong> <%= booking.festival.name %><br>
+      <strong>Location:</strong> <%= booking.festival.location %><br>
+      <strong>Date:</strong> <%= booking.booking_date %><br>
+      <strong>Start Time:</strong> <%= booking.start_time.strftime("%I:%M%p") %><br>
+      <strong>Duration:</strong> <%= booking.duration %> minutes<br>
+      <strong>Status:</strong> <%= booking.status %><br>
+      <% if booking.love_pod %>
+        <strong>Love Pod:</strong> <%= booking.love_pod.name %><br>
+        <strong>Description:</strong> <%= booking.love_pod.description %><br>
+        <strong>Capacity:</strong> <%= booking.love_pod.capacity %>
+      <% else %>
+        <strong>Love Pod:</strong> Not assigned
+      <% end %>
+    </li>
+  <% end %>
+</ul>

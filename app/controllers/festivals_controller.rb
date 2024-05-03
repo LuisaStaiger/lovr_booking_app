@@ -98,7 +98,6 @@ class FestivalsController < ApplicationController
       end
   end
 
-
   def festival_params
     params.require(:festival).permit(:name, :location, :start_date, :end_date, love_pod_ids: [])
   end
