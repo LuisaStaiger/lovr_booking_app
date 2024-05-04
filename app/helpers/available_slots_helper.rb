@@ -1,0 +1,2 @@
+module AvailableSlotsHelper
+end
