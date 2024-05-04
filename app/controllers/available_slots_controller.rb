@@ -1,0 +1,3 @@
+class AvailableSlotsController < ApplicationController
+  
+end

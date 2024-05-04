@@ -47,13 +47,13 @@ class FestivalsController < ApplicationController
 
   # GET /festivals/1/check_availability
   def check_availability
-    # @festival = Festival.find(params:[id])
+    @festival = Festival.find(params[:id])
     @date = params[:date]
     @duration = params[:duration].to_i
     if @date.present? && @duration.present?
       @available_slots = calculate_available_slots(@date, @duration)
       create_available_slot_instances(@available_slots)
-      raise
+      @available_slots = AvailableSlot.all
     else
       @available_slots = []
     end
@@ -93,24 +93,29 @@ class FestivalsController < ApplicationController
     end
   end
 
-  # def check_if_slot_available(start_time, duration)
-  #   end_time = start_time + duration.minutes
-  #   @festival.available_slots.any? do |slot|
-  #     slot.is_available_for?(start_time.to_date, start_time, end_time)
-  #   end
-  # end
-
   def create_available_slot_instances(available_slots)
     available_slots.each do |slot|
-      AvailableSlot.new(date: @date, time_frame: slot,
+      free_pod = find_free_pod_for_slot(slot)
+      AvailableSlot.create(date: @date, time_frame: slot,
       start_time: DateTime.parse(slot), duration: @duration, festival: @festival,
-      love_pod: find_free_pods)
+      love_pod: free_pod)
     end
   end
 
-  def find_free_pods
-    @festival.love_pods.find do |pod|
-      pod.available_slots.exists?
+  def find_free_pod_for_slot(slot)
+    @festival.love_pods.each do |pod|
+      if pod.available_slots.empty? && pod.bookings.empty?
+        return pod
+      elsif !slot_booked?(slot, pod)
+        return pod
+      end
+    end
+    nil
+  end
+
+  def slot_booked?(slot, pod)
+    pod.bookings.any? do |booking|
+      booking.booking_date == @date && booking.start_time.strftime("%H:%M") == slot.split(' - ').first
     end
   end
 

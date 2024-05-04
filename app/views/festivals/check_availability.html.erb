@@ -14,19 +14,25 @@
 <%# Displaying the available slots %>
 <% if @date.present? && @duration.present? && @available_slots.present? %>
   <h2>Available Time Slots on <%= @date %> :</h2>
-  <ul>
-    <% @available_slots.each_with_index do |slot, index| %>
-      <li>
-        <p>Time Slot: <%= slot %></p>
-        <%= form_with url: festival_bookings_path(@festival, @booking, @available_slot), method: :post, local: true do |form| %>
-          <%= form.hidden_field :booking_date, value: @date %>
-          <%= form.hidden_field :start_time, value: DateTime.parse(slot) %>
-          <%= form.hidden_field :duration, value: @duration %>
-          <%= form.submit "Confirm Booking", class: 'button' %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% elsif @date.present? && @duration.present? %>
+  <% filtered_slots = @available_slots.select { |slot| slot.date.to_date == @date.to_date && slot.duration == @duration } %>
+  <% if filtered_slots.present? %>
+    <ul>
+      <% filtered_slots.each do |slot| %>
+        <li>
+          <p>Time Slot: <%= slot.time_frame %></p>
+          <%= form_with url: festival_bookings_path(@festival, @booking), method: :post, local: true do |form| %>
+            <%= form.hidden_field :booking_date, value: slot.date %>
+            <%= form.hidden_field :start_time, value: slot.start_time %>
+            <%= form.hidden_field :duration, value: slot.duration %>
+            <%= form.hidden_field :available_slot_id, value: slot.id %>
+            <%= form.submit "Confirm Booking", class: 'button' %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>No available slots for the selected date and duration.</p>
+  <% end %>
+<% else %>
   <p>No available slots for the selected date and duration.</p>
 <% end %>
