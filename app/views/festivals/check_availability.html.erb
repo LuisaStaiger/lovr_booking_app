@@ -12,9 +12,15 @@
 <% end %>
 
 <%# Displaying the available slots %>
-<% if @date.present? && @duration.present? && @available_slots.present? %>
+<% if @date.present? && @duration.present? && @festival_slots.present? %>
   <h2>Available Time Slots on <%= @date %> :</h2>
-  <% filtered_slots = @available_slots.select { |slot| slot.date.to_date == @date.to_date && slot.duration == @duration } %>
+
+  <% filtered_slots = @festival_slots.select do |slot|
+    slot.date.to_date == @date.to_date &&
+    slot.duration == @duration &&
+    !Booking.exists?(available_slot_id: slot.id)
+  end %>
+
   <% if filtered_slots.present? %>
     <ul>
       <% filtered_slots.each do |slot| %>
