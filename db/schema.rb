@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_03_140914) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_06_092329) do
   create_table "available_slots", force: :cascade do |t|
     t.datetime "date"
     t.string "time_frame"
@@ -61,6 +61,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_03_140914) do
     t.datetime "updated_at", null: false
     t.text "description"
     t.integer "capacity"
+    t.integer "duration_25", default: 25
+    t.integer "duration_55", default: 55
   end
 
   create_table "users", force: :cascade do |t|
