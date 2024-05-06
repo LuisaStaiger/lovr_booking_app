@@ -12,10 +12,10 @@
 <% end %>
 
 <%# Displaying the available slots %>
-<% if @date.present? && @duration.present? && @display_slots.present? %>
+<% if @date.present? && @duration.present? && @festival_slots.present? %>
   <h2>Available Time Slots on <%= @date %> :</h2>
 
-  <% filtered_slots = @display_slots.select do |slot|
+  <% filtered_slots = @festival_slots.select do |slot|
     slot.date.to_date == @date.to_date &&
     slot.duration == @duration &&
     !Booking.exists?(available_slot_id: slot.id)
