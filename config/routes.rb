@@ -4,8 +4,7 @@ Rails.application.routes.draw do
 
   get 'my_bookings', to: 'user_bookings#index', as: 'user_bookings'
   resources :festivals do
-    get 'check_availability', on: :member do  # To view available time slots
-      # post 'confirm_booking', on: :member    # To confirm a booking directly
+    get 'check_availability', on: :member do
     end
     resources :bookings, only: [:new, :create, :show]
   end
