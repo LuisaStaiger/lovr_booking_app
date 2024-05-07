@@ -26,13 +26,9 @@
       <% filtered_slots.each do |slot| %>
         <li>
           <p>Time Slot: <%= slot.time_frame %></p>
-          <%= form_with url: festival_bookings_path(@festival, @booking), method: :post, local: true do |form| %>
-            <%= form.hidden_field :booking_date, value: slot.date %>
-            <%= form.hidden_field :start_time, value: slot.start_time %>
-            <%= form.hidden_field :duration, value: slot.duration %>
-            <%= form.hidden_field :available_slot_id, value: slot.id %>
-            <%= form.submit "Confirm Booking", class: 'button' %>
-          <% end %>
+          <%= link_to "Book a slot", new_festival_booking_path(festival_id: @festival.id,
+          booking_date: slot.date, start_time: slot.start_time, duration: slot.duration,
+          available_slot_id: slot.id, love_pod: slot.love_pod) %>
         </li>
       <% end %>
     </ul>
