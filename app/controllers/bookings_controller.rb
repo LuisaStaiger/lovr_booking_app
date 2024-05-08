@@ -1,5 +1,5 @@
 class BookingsController < ApplicationController
-  before_action :set_booking, only: [:show, :create, :destroy]
+  before_action :set_booking, only: [:show, :destroy]
   # before_action :set_festival, only: [:create]
   # before_action :set_love_pod, only: [:create]
 
@@ -20,18 +20,13 @@ class BookingsController < ApplicationController
 
 
   def create
-    # @booking = Booking.new
-    # @booking.available_slot_id = params[:available_slot_id]
-    # @booking.duration = params[:duration]
-    # @booking.start_time = params[:start_time]
-    # @booking.user = current_user
-    # @booking.booking_date = params[:booking_date]
-
+    @booking = Booking.new(booking_params)
+    @booking.user = current_user
     if @booking.save
-      redirect_to booking_path(@booking), notice: 'Booking was successfully created.'
-    else
-      flash.now[:alert] = 'Failed to create booking: '
-      redirect_to check_availability_festival_path(@booking.available_slot.festival)
+      redirect_to user_bookings_path, notice: 'Booking was successfully created.'
+    # else
+    #   flash.now[:alert] = 'Failed to create booking: '
+    #   redirect_to check_availability_festival_path(@booking.available_slot.festival)
     end
   end
 
@@ -39,7 +34,8 @@ class BookingsController < ApplicationController
   end
 
   def destroy
-
+    @booking.destroy
+    redirect_to user_bookings_path
   end
 
   private

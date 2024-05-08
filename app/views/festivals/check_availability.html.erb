@@ -19,16 +19,19 @@
     slot.date.to_date == @date.to_date &&
     slot.duration == @duration &&
     !Booking.exists?(available_slot_id: slot.id)
-  end %>
+  end.group_by(&:time_frame) %>
 
   <% if filtered_slots.present? %>
     <ul>
-      <% filtered_slots.each do |slot| %>
+      <% filtered_slots.each do |time_frame, slots| %>
+        <% unbooked_slot = slots.find { |slot| !Booking.exists?(available_slot_id: slot.id) } %>
+        <% next unless unbooked_slot %>
         <li>
-          <p>Time Slot: <%= slot.time_frame %></p>
+          <p>Time Slot: <%= unbooked_slot.time_frame %></p>
           <%= link_to "Book a slot", new_festival_booking_path(festival_id: @festival.id,
-          booking_date: slot.date, start_time: slot.start_time, duration: slot.duration,
-          available_slot_id: slot.id, love_pod: slot.love_pod) %>
+            booking_date: unbooked_slot.date, start_time: unbooked_slot.start_time,
+            duration: unbooked_slot.duration, available_slot_id: unbooked_slot.id,
+            love_pod: unbooked_slot.love_pod) %>
         </li>
       <% end %>
     </ul>
