@@ -10,6 +10,11 @@
   <%= @love_pod.capacity %>
 </p>
 
+<p>
+  <strong>Availability time frame:</strong>
+  <%= @love_pod.availabilty_start_time.strftime("%H:%M") %> - <%= @love_pod.availabilty_end_time.strftime("%H:%M")  %>
+</p>
+
 <%= link_to 'Edit', edit_love_pod_path(@love_pod), class: 'btn btn-warning' %>
 <%= link_to 'Delete', love_pod_path(@love_pod),
             method: :delete,
