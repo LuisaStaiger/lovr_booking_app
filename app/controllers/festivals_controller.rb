@@ -1,6 +1,6 @@
 class FestivalsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index], if: -> { action_name == 'index' && controller_name == 'festivals' }
-  before_action :set_festival, only: [:show, :edit, :update, :destroy, :check_availability, :calculate_slots]
+  before_action :set_festival, only: [:show, :edit, :update, :destroy, :check_availability]
   before_action :set_available_slots, only: [:check_availability, :update]
 
   # GET /festivals
@@ -25,8 +25,9 @@ class FestivalsController < ApplicationController
   def create
     @festival = Festival.new(festival_params)
     if @festival.save
-      @available_slots = calculate_slots
-      create_available_slot_instances(@available_slots)
+      # @available_slots = calculate_slots
+      slots = create_available_slot_instances(@festival)
+      slots.each { |slot| slot.save }
       redirect_to @festival, notice: 'Festival was successfully created.'
     else
       render :new
@@ -62,10 +63,6 @@ class FestivalsController < ApplicationController
     render :check_availability
   end
 
-  def calculate_slots
-    calculate_available_slots(@festival)
-  end
-
   private
 
   def set_festival
@@ -78,43 +75,11 @@ class FestivalsController < ApplicationController
     end
   end
 
-  def calculate_available_slots(festival)
-    durations = [25, 55]
-    available_slots = []
-    start_date = festival.start_date
-    end_date = festival.start_date
-
-    durations.each do |duration|
-      (start_date..end_date).each do |date|
-        start_time = DateTime.parse("#{date} 09:00")
-        end_time = DateTime.parse("#{date} 23:00")
-
-        while start_time + duration.minutes <= end_time
-          time_frame = "#{start_time.strftime('%H:%M')} - #{(start_time + duration.minutes).strftime('%H:%M')}"
-          available_slots << [date, time_frame, start_time, start_time + duration.minutes, duration]
-          start_time += (duration + 5).minutes
-        end
-      end
-    end
-    available_slots
-  end
-
   def update_available_slots(festival)
     old_slots = AvailableSlot.all.select do |slot|
       slot.festival = festival
     end
-    new_available_slots = calculate_available_slots(festival)
-    updated_slots = []
-
-    new_available_slots.each do |slot|
-      festival.love_pods.each do |pod|
-        updated_slots << AvailableSlot.new(date: slot[0].to_datetime,
-        time_frame: slot[1],
-        start_time: slot[2],
-        duration: slot[4], festival: festival,
-        love_pod: pod)
-      end
-    end
+    updated_slots = create_available_slot_instances(festival)
 
     updated_slots.each do |new_slot|
       matching_old_slot = old_slots.find do |old_slot|
@@ -140,21 +105,34 @@ class FestivalsController < ApplicationController
   end
 
 
-  def create_available_slot_instances(available_slots)
-      available_slots.each do |slot|
-        date = slot[0].to_datetime
-        time_frame = slot[1]
-        start_time = slot[2]
-        duration = slot[4]
+  def create_available_slot_instances(festival)
+    start_date = festival.start_date
+    end_date = festival.end_date
+    durations = [25, 55]
+    slots = []
 
-        @festival.love_pods.each do |pod|
-          AvailableSlot.find_or_create_by(date: date,
-          time_frame: time_frame,
-          start_time: start_time,
-          duration: duration, festival: @festival,
-          love_pod: pod)
+    durations.each do |duration|
+      (start_date..end_date).each do |date|
+        festival.love_pods.each do |pod|
+
+        start_time = pod.availabilty_start_time
+        end_time = pod.availabilty_end_time
+
+          while start_time + duration.minutes <= end_time
+            time_frame = "#{start_time.strftime('%H:%M')} - #{(start_time + duration.minutes).strftime('%H:%M')}"
+
+            slots << AvailableSlot.new(date: date,
+            time_frame: time_frame,
+            start_time: start_time,
+            duration: duration, festival: festival,
+            love_pod: pod)
+
+            start_time += (duration + 5).minutes
+          end
         end
       end
+    end
+    slots
   end
 
   def festival_params

@@ -28,6 +28,20 @@
     <%= form.number_field :capacity, id: :love_pod_capacity, class: 'form-input' %>
   </div>
 
+    <div class="field">
+    <%= form.label :availabilty_start_time, 'Available from ' %>
+    <%= form.time_field :availabilty_start_time, id: :love_pod_availabilty_start_time, class: 'form-control', value: form.object.availabilty_start_time.strftime('%H:%M'),
+      min: 'hh:mm:ss',
+      max: 'hh:mm:ss'%>
+  </div>
+
+  <div class="field">
+    <%= form.label :availabilty_end_time, 'until' %>
+    <%= form.time_field :availabilty_end_time, id: :love_pod_availabilty_end_time, class: 'form-control', value: form.object.availabilty_end_time.strftime('%H:%M'),
+      min: 'hh:mm:ss',
+      max: 'hh:mm:ss' %>
+  </div>
+
   <div class="actions">
     <%= form.submit 'Create Love Pod', class: 'btn btn-primary' %>
   </div>
