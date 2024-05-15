@@ -23,6 +23,7 @@ class BookingsController < ApplicationController
     @booking = Booking.new(booking_params)
     @booking.user = current_user
     if @booking.save
+      @booking.status = 1
       redirect_to user_bookings_path, notice: 'Booking was successfully created.'
     # else
     #   flash.now[:alert] = 'Failed to create booking: '
