@@ -1,31 +1,26 @@
 class FestivalsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index], if: -> { action_name == 'index' && controller_name == 'festivals' }
-  before_action :set_festival, only: [:show, :edit, :update, :destroy, :check_availability]
+  # skip_before_action :authenticate_user!, only: [:index], if: -> { action_name == 'index' && controller_name == 'festivals' }
+  before_action :authenticate_user!
+  before_action :set_festival, only: [:edit, :update, :destroy, :show, :check_availability]
   before_action :set_available_slots, only: [:check_availability, :update]
 
-  # GET /festivals
   def index
     @festivals = Festival.all
   end
 
-  # GET /festivals/1
   def show
   end
 
-  # GET /festivals/new
   def new
     @festival = Festival.new
   end
 
-  # GET /festivals/1/edit
   def edit
   end
 
-  # POST /festivals
   def create
     @festival = Festival.new(festival_params)
     if @festival.save
-      # @available_slots = calculate_slots
       slots = create_available_slot_instances(@festival)
       slots.each { |slot| slot.save }
       redirect_to @festival, notice: 'Festival was successfully created.'
@@ -34,7 +29,6 @@ class FestivalsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /festivals/1
   def update
     if @festival.update(festival_params)
       update_available_slots(@festival)
@@ -44,13 +38,11 @@ class FestivalsController < ApplicationController
     end
   end
 
-  # DELETE /festivals/1
   def destroy
     @festival.destroy
     redirect_to festivals_path, notice: 'Festival was successfully deleted.'
   end
 
-  # GET /festivals/1/check_availability
   def check_availability
     @festival = Festival.find(params[:id])
     @date = params[:date]

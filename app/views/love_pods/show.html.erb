@@ -15,9 +15,11 @@
   <%= @love_pod.availabilty_start_time.strftime("%H:%M") %> - <%= @love_pod.availabilty_end_time.strftime("%H:%M")  %>
 </p>
 
-<%= link_to 'Edit', edit_love_pod_path(@love_pod), class: 'btn btn-warning' %>
-<%= link_to 'Delete', love_pod_path(@love_pod),
-            method: :delete,
-            data: { confirm: 'Are you sure?' },
-            class: 'btn btn-danger' %>
+<% if current_user.admin? %>
+  <%= link_to 'Edit', edit_love_pod_path(@love_pod), class: 'btn btn-warning' %>
+  <%= link_to 'Delete', love_pod_path(@love_pod),
+              method: :delete,
+              data: { confirm: 'Are you sure?' },
+              class: 'btn btn-danger' %>
+<% end %>
 <%= link_to 'Back to Love Pods', love_pods_path, class: 'btn btn-link' %>

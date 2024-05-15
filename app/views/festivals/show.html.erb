@@ -22,5 +22,8 @@
 
 <div class="festival-actions">
   <%= link_to 'Back to Festivals', festivals_path, class: 'button' %>
-  <%= link_to 'Edit', edit_festival_path(@festival), class: 'button' %>
-  <%= link_to 'Delete', festival_path(@festival), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+  <% if current_user.admin? %>
+    <%= link_to 'Edit', edit_festival_path(@festival), class: 'button' %>
+    <%= link_to 'Delete', festival_path(@festival), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+  <% end %>
+</div>

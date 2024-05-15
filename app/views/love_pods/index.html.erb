@@ -25,4 +25,6 @@
   </tbody>
 </table>
 
-<%= link_to 'New Love Pod', new_love_pod_path, class: 'btn btn-primary' %>
+<% if current_user.admin? %>
+  <%= link_to 'New Love Pod', new_love_pod_path, class: 'btn btn-primary' %>
+<% end %>
