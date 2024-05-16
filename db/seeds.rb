@@ -8,7 +8,9 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-User.destroy_all
+User.destroy_all if Rails.env.development?
+Festival.destroy_all if Rails.env.development?
+LovePod.destroy_all if Rails.env.development?
 
 User.create!(email: "admin@mail.com", password: "123456", admin: true)
 User.create!(email: "user@mail.com", password: "123456")
@@ -32,36 +34,46 @@ festivals.each do |festival|
   start_date = festival.start_date
   end_date = festival.end_date
   durations = [25, 55]
-  available_slots = []
 
   durations.each do |duration|
     (start_date..end_date).each do |date|
-      start_time = DateTime.parse("#{date} 09:00")
-      end_time = DateTime.parse("#{date} 23:00")
+      festival.love_pods.each do |pod|
 
-      while start_time + duration.minutes <= end_time
-        time_frame = "#{start_time.strftime('%H:%M')} - #{(start_time + duration.minutes).strftime('%H:%M')}"
-        available_slots << [date, time_frame, start_time, start_time + duration.minutes, duration]
-        start_time += (duration + 5).minutes
+        start_time = pod.availabilty_start_time
+        end_time = pod.availabilty_end_time
+
+        while start_time + duration.minutes <= end_time
+          time_frame = "#{start_time.strftime('%H:%M')} - #{(start_time + duration.minutes).strftime('%H:%M')}"
+
+          slot = AvailableSlot.new(date: date,
+          time_frame: time_frame,
+          start_time: start_time,
+          duration: duration, festival: festival,
+          love_pod: pod)
+
+          start_time += (duration + 5).minutes
+          slot.save!
+        end
       end
     end
   end
-
-  available_slots.each do |slot|
-    date = slot[0].to_datetime
-    time_frame = slot[1]
-    start_time = slot[2]
-    duration = slot[4]
-
-    festival.love_pods.each do |pod|
-      AvailableSlot.create!(date: date,
-      time_frame: time_frame,
-      start_time: start_time,
-      duration: duration, festival: festival,
-      love_pod: pod)
-    end
-  end
 end
+
+
+  # available_slots.each do |slot|
+  #   date = slot[0].to_datetime
+  #   time_frame = slot[1]
+  #   start_time = slot[2]
+  #   duration = slot[4]
+
+  #   festival.love_pods.each do |pod|
+  #     AvailableSlot.create!(date: date,
+  #     time_frame: time_frame,
+  #     start_time: start_time,
+  #     duration: duration, festival: festival,
+  #     love_pod: pod)
+  #   end
+  # end
 
 
 # Output to confirm seeding

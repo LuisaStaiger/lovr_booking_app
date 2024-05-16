@@ -8,7 +8,7 @@
     <ul class="love-pods-list">
       <% @festival.love_pods.each do |love_pod| %>
         <li class="love-pod">
-          <%= link_to love_pod.name, love_pod_path(love_pod), class: 'btn btn-link' %>
+          <%= link_to love_pod.name, festival_love_pod_path(@festival, love_pod), class: 'btn btn-link' %>
         </li>
       <% end %>
     </ul>
@@ -22,7 +22,7 @@
 
 <div class="festival-actions">
   <%= link_to 'Back to Festivals', festivals_path, class: 'button' %>
-  <% if current_user.admin? %>
+  <% if user_signed_in? && current_user.admin? %>
     <%= link_to 'Edit', edit_festival_path(@festival), class: 'button' %>
     <%= link_to 'Delete', festival_path(@festival), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
   <% end %>

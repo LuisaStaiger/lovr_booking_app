@@ -1,5 +1,6 @@
 class LovePodsController < ApplicationController
-  before_action :set_love_pod, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authenticate_user!, only: [:show]
+  before_action :set_love_pod, only: [:show, :edit, :update, :destroy, :show_from_index]
 
   def index
     @love_pods = LovePod.all
@@ -19,7 +20,10 @@ class LovePodsController < ApplicationController
   end
 
   def show
-    @love_pod = LovePod.find(params[:id])
+    @festival = Festival.find(params[:festival_id])
+  end
+
+  def show_from_index
   end
 
   def edit
