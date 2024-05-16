@@ -7,8 +7,13 @@ Rails.application.routes.draw do
     get 'check_availability', on: :member do
     end
     resources :bookings, only: [:new, :create, :show]
+    resources :love_pods, only: [:show]
   end
 
-  resources :love_pods
+  resources :love_pods do
+    get 'show_from_index', on: :member do
+    end
+  end
+  
   resources :bookings, only: [:destroy]
 end

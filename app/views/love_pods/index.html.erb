@@ -16,7 +16,7 @@
         <td><%= love_pod.description %></td>
         <td><%= love_pod.capacity %></td>
         <td>
-          <%= link_to 'Show', love_pod_path(love_pod), class: 'btn btn-info' %>
+          <%= link_to 'Show', show_from_index_love_pod_path(love_pod), class: 'btn btn-info' %>
           <%= link_to 'Edit', edit_love_pod_path(love_pod), class: 'btn btn-warning' %>
           <%= link_to 'Delete', love_pod_path(love_pod), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
         </td>
@@ -28,3 +28,5 @@
 <% if current_user.admin? %>
   <%= link_to 'New Love Pod', new_love_pod_path, class: 'btn btn-primary' %>
 <% end %>
+
+

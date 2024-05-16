@@ -1,25 +1,3 @@
-<h1><%= @love_pod.name %></h1>
+<%= render "show_pod" %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @love_pod.description %>
-</p>
-
-<p>
-  <strong>Capacity:</strong>
-  <%= @love_pod.capacity %>
-</p>
-
-<p>
-  <strong>Availability time frame:</strong>
-  <%= @love_pod.availabilty_start_time.strftime("%H:%M") %> - <%= @love_pod.availabilty_end_time.strftime("%H:%M")  %>
-</p>
-
-<% if current_user.admin? %>
-  <%= link_to 'Edit', edit_love_pod_path(@love_pod), class: 'btn btn-warning' %>
-  <%= link_to 'Delete', love_pod_path(@love_pod),
-              method: :delete,
-              data: { confirm: 'Are you sure?' },
-              class: 'btn btn-danger' %>
-<% end %>
-<%= link_to 'Back to Love Pods', love_pods_path, class: 'btn btn-link' %>
+<%= link_to 'Back to festival', festival_path(@festival), class: 'btn btn-link' %>

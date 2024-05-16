@@ -1,6 +1,6 @@
 class FestivalsController < ApplicationController
   # skip_before_action :authenticate_user!, only: [:index], if: -> { action_name == 'index' && controller_name == 'festivals' }
-  before_action :authenticate_user!
+  skip_before_action :authenticate_user!, only: [:index, :show, :check_availability]
   before_action :set_festival, only: [:edit, :update, :destroy, :show, :check_availability]
   before_action :set_available_slots, only: [:check_availability, :update]
 

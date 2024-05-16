@@ -5,8 +5,8 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ml-auto">
-      <% if user_signed_in? %>
       <li class="nav-item"><%= link_to 'Festivals', root_path, class: 'nav-link' %></li>
+      <% if user_signed_in? %>
       <li class="nav-item"><%= link_to 'My Bookings', user_bookings_path, class: 'nav-link' %></li>
         <% if current_user.admin? %>
           <li class="nav-item"><%= link_to 'LovePods', love_pods_path, class: 'nav-link' %></li>
@@ -14,8 +14,8 @@
           <li class="nav-item"><%= link_to 'Create LovePod',  new_love_pod_path, class: 'nav-link'%></li>
         <% end %>
           <li class="nav-item"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-link' %></li>
-      <%# else %>
-<!--        <li class="nav-item"><%#= link_to 'Sign In', new_user_session_path, class: 'nav-link' %></li>-->
+      <% else %>
+        <li class="nav-item"><%= link_to 'Sign In', new_user_session_path, class: 'nav-link' %></li>
         <% end %>
     </ul>
   </div>

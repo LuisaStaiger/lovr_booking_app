@@ -10,6 +10,6 @@
   <% end %>
 </div>
 
-<% if current_user.admin? %>
+<% if user_signed_in? && current_user.admin? %>
   <%= link_to 'Add a Festival',  new_festival_path, class: "button add-festival-btn" %>
 <% end %>
