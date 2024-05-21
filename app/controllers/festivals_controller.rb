@@ -117,7 +117,8 @@ class FestivalsController < ApplicationController
             time_frame: time_frame,
             start_time: start_time,
             duration: duration, festival: festival,
-            love_pod: pod)
+            love_pod: pod,
+            price: 10)
 
             start_time += (duration + 5).minutes
           end

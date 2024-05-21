@@ -27,7 +27,7 @@
         <% unbooked_slot = slots.find { |slot| !Booking.exists?(available_slot_id: slot.id) } %>
         <% next unless unbooked_slot %>
         <li>
-          <p>Time Slot: <%= unbooked_slot.time_frame %></p>
+          <p>Time Slot: <%= unbooked_slot.time_frame %> (<%= humanized_money_with_symbol(unbooked_slot.price) %>)</p>
           <%= link_to "Book a slot", new_festival_booking_path(festival_id: @festival.id,
             booking_date: unbooked_slot.date, start_time: unbooked_slot.start_time,
             duration: unbooked_slot.duration, available_slot_id: unbooked_slot.id,
