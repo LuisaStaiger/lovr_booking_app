@@ -20,6 +20,7 @@
   <li>Start time: <%= @booking.start_time.strftime('%H:%M') %></li>
   <li>Duration: <%= @booking.duration %></li>
   <li>Love Pod: <%= @available_slot.love_pod.name %></li>
+  <li>Price: <%= humanized_money_with_symbol(@booking.amount) %></li>
 </ul>
 
 
