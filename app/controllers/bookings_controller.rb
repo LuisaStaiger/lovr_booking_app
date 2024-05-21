@@ -13,7 +13,9 @@ class BookingsController < ApplicationController
       start_time: params[:start_time],
       duration: params[:duration],
       available_slot_id: params[:available_slot_id],
-      user: current_user
+      user: current_user,
+      slots_sku: params[:slots_sku],
+      amount: params[:amount]
     )
     @available_slot = AvailableSlot.find(@booking.available_slot_id)
   end
@@ -25,6 +27,25 @@ class BookingsController < ApplicationController
     if @booking.save
       @booking.status = 1
       redirect_to user_bookings_path, notice: 'Booking was successfully created.'
+      slot = AvailableSlot.find(:available_slot_id)
+      booking = @booking
+
+      session = Stripe::Checkout::Session.create(
+        payment_method_types: ['card'],
+        line_items: [{
+          name: slot.sku,
+          # images: [teddy.photo_url],
+          amount: slot.price_cents,
+          currency: 'eur',
+          quantity: 1
+          }],
+          success_url: booking_url(booking),
+          cancel_url: booking_url(booking)
+          )
+          
+      booking.update(checkout_session_id: session.id)
+      redirect_to new_booking_payment_path(booking)
+
     # else
     #   flash.now[:alert] = 'Failed to create booking: '
     #   redirect_to check_availability_festival_path(@booking.available_slot.festival)
@@ -42,10 +63,11 @@ class BookingsController < ApplicationController
   private
 
   def set_booking
-    @booking = Booking.find(params[:id])
+    @booking = current_user.bookings.find(params[:id])
   end
 
   def booking_params
-    params.require(:booking).permit(:start_time, :duration, :booking_date, :available_slot_id)
+    params.require(:booking).permit(:start_time, :duration, :booking_date,
+    :amount, :available_slot_id)
   end
 end

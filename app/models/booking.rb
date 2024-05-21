@@ -1,6 +1,7 @@
 class Booking < ApplicationRecord
   belongs_to :user
-  validates :booking_date, :start_time, :duration, presence: true
+  validates :booking_date, :start_time, :duration, :amount, presence: true
+  monetize :amount_cents
 
   # validates :available_slot_id, uniqueness: { scope: [:booking_date, :love_pod_id] }
 
