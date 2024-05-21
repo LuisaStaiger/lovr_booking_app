@@ -48,9 +48,3 @@ Ensure you have the following installed on your local development machine:
   `rails s`
 
 You should now be able to access the app at http://localhost:3000
-
-
-Run the server
-
-rails s
-You should now be able to access the app at http://localhost:3000
