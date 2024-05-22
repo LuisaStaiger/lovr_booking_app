@@ -75,3 +75,4 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem 'money-rails'
 
 gem 'stripe'
+gem "sassc-rails"

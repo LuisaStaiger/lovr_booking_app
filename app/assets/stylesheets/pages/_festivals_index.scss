@@ -1,0 +1,17 @@
+/* Festival List & Individual Items */
+.festivals-list .festival {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: .25rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.festival-name {
+  margin-top: 0;
+}
+
+.festival-location, .festival-dates {
+  color: #666;
+}

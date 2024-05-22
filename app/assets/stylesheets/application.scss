@@ -1,0 +1,28 @@
+/* Global Styles */
+@import "config/colors";
+@import "config/fronts";
+@import "components/index";
+@import "pages/index";
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #333;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+.page-title {
+  text-align: center;
+  color: #007bff;
+  margin-bottom: 40px;
+}
+
+/* Links */
+a, .back-link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover, .back-link:hover {
+  text-decoration: underline;
+}
