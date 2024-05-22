@@ -1,0 +1,31 @@
+/* Global Styles */
+@import "config/colors";
+@import "config/fronts";
+@import "components/index";
+@import "pages/index";
+
+body {
+  font-family: "Nunito", sans-serif;
+  color: #333;
+  background-color: $very-light-blue;
+  padding: 6vw;
+
+  .page-title {
+    text-align: center;
+    color: $blue-green;
+    margin-bottom: 4vh;
+  }
+
+  a {
+    color: $blue-green;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: $darker-blue-green;
+    text-decoration: none;
+  }
+}
+
+
+/* Links */

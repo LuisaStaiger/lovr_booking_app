@@ -1,0 +1,50 @@
+/* Festival Details Page Styles */
+.festival-details {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  margin-bottom: 20px;
+}
+
+.festival-title {
+  color: $dark-blue;
+  margin-bottom: 20px;
+}
+
+.festival-info {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+/* Love Pods List */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  padding: 8px 0;
+}
+
+.love-pods-list {
+  margin-top: 20px;
+}
+
+.love-pod {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 5px;
+  list-style-type: none;
+}
+
+.festival-actions {
+  text-align: center;
+}
+
+.festival-actions .button, .festival-actions .btn {
+  margin: 5px;
+}

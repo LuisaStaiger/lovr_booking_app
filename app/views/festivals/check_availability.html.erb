@@ -11,6 +11,8 @@
   <%= form.submit "Show Available Time Slots", class: 'button' %>
 <% end %>
 
+
+
 <%# Displaying the available slots %>
 <% if @date.present? && @duration.present? && @festival_slots.present? %>
   <h2>Available Time Slots on <%= @date %> :</h2>

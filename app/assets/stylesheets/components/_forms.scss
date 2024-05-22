@@ -1,0 +1,22 @@
+/* Forms and Fields */
+.festival-form, .field {
+  margin-bottom: 20px;
+}
+
+.form-label, label {
+  display: block;
+  margin-bottom: .5rem;
+  font-weight: bold;
+}
+
+.form-input, input[type="text"], input[type="date"], select, textarea {
+  width: 100%;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem;
+}
