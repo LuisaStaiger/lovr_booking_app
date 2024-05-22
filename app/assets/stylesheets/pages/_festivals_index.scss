@@ -1,23 +1,34 @@
 /* Festival List & Individual Items */
-.festivals-list .festival {
-  background-color: #fff;
-  border: 1px solid $light-blue;
-  padding: 3vw;
-  margin-bottom: 3vh;
-  border-radius: 1.25rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+.page-title {
+  text-align: center;
+  color: $blue-green;
+  margin-bottom: 4vh;
 }
 
-  .festival-name {
+.festivals-list {
+
+  .festival {
+    background-color: #fff;
+    border: 1px solid $light-blue;
+    padding: 3vw;
+    margin-bottom: 3vh;
+    border-radius: 1.25rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  }
+
+  h2 {
     margin-top: 1vh;
     text-align: center;
   }
 
-  .festival-photo img {
+  img {
     width: 100%;
     padding: 1vh;
     border-radius: 20px;
   }
+}
+
+
 
 .festival-description {
   text-align: center;

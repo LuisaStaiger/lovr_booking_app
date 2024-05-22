@@ -1,36 +1,77 @@
 /* Festival Details Page Styles */
 .festival-details {
-  background-color: #fff;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0,0,0,.1);
-  margin-bottom: 20px;
-}
+  display: flex;
+  flex-direction: column;
+  // padding: 1vw;
 
-.festival-title {
-  color: $dark-blue;
-  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid $light-blue;
+  padding: 3vw;
+  margin-bottom: 3vh;
+  border-radius: 1.25rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1);
+
+  h2 {
+    color: $dark-blue;
+  }
+
+  h3 {
+    color: $blue-green;
+    font-weight: 600;
+    font-size: 18px;
+  }
+
+  img {
+    width: 100%;
+    padding: 1vh;
+    border-radius: 20px;
+  }
 }
 
 .festival-info {
-  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
   font-size: 16px;
+  padding: 2vw;
 }
 
-/* Love Pods List */
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-ul li {
-  padding: 8px 0;
+.festival-love-pods {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid $light-blue;
+  padding: 3vw;
+  border-radius: 1.25rem;
+  margin-bottom: 3vh;
 }
 
 .love-pods-list {
-  margin-top: 20px;
+  display: flex;
+  gap: 1vw;
+  row-gap: 1vw;
+  column-gap: 1vw;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  padding: 2vw;
+
+  a {
+    text-decoration: none;
+    border: 1px solid $blue-green;
+    border-radius: 1.25rem;
+    padding: 0.4rem;
+  }
+
 }
+
+// ul {
+//   list-style-type: none;
+//   padding: 0;
+// }
+
+// ul li {
+//   padding: 8px 0;
+// }
 
 .love-pod {
   background-color: #f8f9fa;
@@ -39,6 +80,7 @@ ul li {
   padding: 10px;
   margin-bottom: 5px;
   list-style-type: none;
+  flex-grow: 1;
 }
 
 .festival-actions {
