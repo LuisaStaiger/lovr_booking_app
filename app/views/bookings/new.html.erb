@@ -24,13 +24,13 @@
 </ul>
 
 
-<%= form_with model: @booking, url: festival_bookings_path(@festival), method: :post, local: true do |form| %>
+<%= form_with model: @booking, url: festival_bookings_path(@festival), method: :post, local: true, data: { turbo: false } do |form| %>
   <%= form.hidden_field :booking_date %>
   <%= form.hidden_field :start_time %>
   <%= form.hidden_field :duration %>
-  <%= form.hidden_field :available_slot_id %>
+  <%= form.hidden_field :available_slot_id, value: @available_slot.id %>
   <%= form.hidden_field :festival_id %>
-  <%= form.submit "Confirm booking", class: 'button', class: 'btn btn-info' %>
+  <%= form.submit "Confirm booking", class: 'button btn btn-info' %>
 <% end %>
 
 <%#= link_to "Cancel booking", booking_path(@booking) %>
