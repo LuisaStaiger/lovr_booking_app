@@ -10,12 +10,6 @@ body {
   background-color: $very-light-blue;
   padding: 6vw;
 
-  .page-title {
-    text-align: center;
-    color: $blue-green;
-    margin-bottom: 4vh;
-  }
-
   a {
     color: $blue-green;
     text-decoration: none;
@@ -24,6 +18,12 @@ body {
   a:hover {
     color: $darker-blue-green;
     text-decoration: none;
+  }
+
+  h2 {
+    margin-bottom: 20px;
+    margin-top: 1vh;
+    text-align: center;
   }
 }
 

@@ -9,7 +9,7 @@
     <div class="festival">
       <h2 class="festival-name"><%= link_to festival.name, festival_path(festival) %></h2>
       <div class="festival-description">
-        <div class="festival-photo"><%= image_tag festival.photo %></div>
+        <%= image_tag festival.photo %>
         <p class="festival-location">Location: <%= festival.location %></p>
         <p class="festival-dates">Dates: <%= festival.start_date %> to <%= festival.end_date %></p>
       </div>

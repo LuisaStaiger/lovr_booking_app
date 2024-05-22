@@ -1,29 +1,45 @@
+
 <div class="festival-details">
-  <h1 class="festival-title"><%= @festival.name %></h1>
-  <p class="festival-info"><strong>Location:</strong> <%= @festival.location %></p>
-  <p class="festival-info"><strong>Dates:</strong> <%= @festival.start_date %> to <%= @festival.end_date %></p>
+  <%= image_tag @festival.photo %>
+  <h2><%= @festival.name %></h2>
 
-<h2>Love Pods at this Festival</h2>
-  <% if @festival.love_pods.any? %>
-    <ul class="love-pods-list">
-      <% @festival.love_pods.each do |love_pod| %>
-        <li class="love-pod">
-          <%= link_to love_pod.name, festival_love_pod_path(@festival, love_pod), class: 'btn btn-link' %>
-        </li>
+  <div class="festival-info">
+    <p><strong>Location:</strong> <%= @festival.location %></p>
+    <p><strong>Dates:</strong> <%= @festival.start_date %> to <%= @festival.end_date %></p>
+  </div>
+
+  <div class="festival-love-pods">
+    <h3>Love Pods at this Festival</h2>
+      <% if @festival.love_pods.any? %>
+      <div class="love-pods-list">
+          <% @festival.love_pods.each do |love_pod| %>
+              <%= link_to love_pod.name, festival_love_pod_path(@festival, love_pod) %>
+          <% end %>
+
+                    <% @festival.love_pods.each do |love_pod| %>
+              <%= link_to love_pod.name, festival_love_pod_path(@festival, love_pod) %>
+          <% end %>
+
+                    <% @festival.love_pods.each do |love_pod| %>
+              <%= link_to love_pod.name, festival_love_pod_path(@festival, love_pod) %>
+          <% end %>
+      </div>
+      <% else %>
+        <p>No Love Pods available for this festival.</p>
       <% end %>
-    </ul>
-  <% else %>
-    <p>No Love Pods available for this festival.</p>
-  <% end %>
+  </div>
 
-<div class="festival-actions">
-  <%= link_to 'Check availability', check_availability_festival_path(@festival), class: 'button' %>
-</div>
 
-<div class="festival-actions">
-  <%= link_to 'Back to Festivals', festivals_path, class: 'button' %>
-  <% if user_signed_in? && current_user.admin? %>
-    <%= link_to 'Edit', edit_festival_path(@festival), class: 'button' %>
-    <%= link_to 'Delete', festival_path(@festival), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-  <% end %>
+  <div class="festival-actions">
+    <%= link_to 'Check availability', check_availability_festival_path(@festival), class: 'button' %>
+  </div>
+
+  <div class="festival-actions">
+    <%= link_to 'Back to Festivals', festivals_path, class: 'button' %>
+    <% if user_signed_in? && current_user.admin? %>
+      <%= link_to 'Edit', edit_festival_path(@festival), class: 'button' %>
+      <%= link_to 'Delete', festival_path(@festival), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+    <% end %>
+
+  </div>
 </div>

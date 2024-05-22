@@ -1,3 +1,19 @@
 .navbar {
   margin-bottom: 4vh
 }
+
+.nav-item {
+  text-align: end;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: $pink;
+  background-color: white;
+  font-weight: 600;
+  font-size: 18px;
+
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+  color: $darker-pink;
+}
