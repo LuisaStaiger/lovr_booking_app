@@ -5,24 +5,27 @@
 @import "pages/index";
 
 body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: "Nunito", sans-serif;
   color: #333;
-  background-color: #f4f4f4;
-  padding: 20px;
+  background-color: $very-light-blue;
+  padding: 6vw;
+
+  .page-title {
+    text-align: center;
+    color: $blue-green;
+    margin-bottom: 4vh;
+  }
+
+  a {
+    color: $blue-green;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: $darker-blue-green;
+    text-decoration: none;
+  }
 }
 
-.page-title {
-  text-align: center;
-  color: #007bff;
-  margin-bottom: 40px;
-}
 
 /* Links */
-a, .back-link {
-  color: #007bff;
-  text-decoration: none;
-}
-
-a:hover, .back-link:hover {
-  text-decoration: underline;
-}
