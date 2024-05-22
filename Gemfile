@@ -79,3 +79,5 @@ gem 'stripe'
 
 gem 'rack-cors', require: 'rack/cors'
 
+gem "sassc-rails"
+

@@ -8,6 +8,8 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+require 'open-uri'
+
 User.destroy_all if Rails.env.development?
 Festival.destroy_all if Rails.env.development?
 LovePod.destroy_all if Rails.env.development?
@@ -16,8 +18,15 @@ User.create!(email: "admin@mail.com", password: "123456", admin: true)
 User.create!(email: "user@mail.com", password: "123456")
 
 # Create Festivals
-festival1 = Festival.create!(name: "Summer Music Fest", location: "Central Park", start_date: Date.new(2024, 6, 10), end_date: Date.new(2024, 6, 12))
-festival2 = Festival.create!(name: "Winter Art Festival", location: "Downtown Gallery", start_date: Date.new(2024, 12, 5), end_date: Date.new(2024, 12, 8))
+festival1 = Festival.new(name: "Summer Music Fest", location: "Central Park", start_date: Date.new(2024, 6, 10), end_date: Date.new(2024, 6, 12))
+sommerpic = URI.open('app/assets/images/sommerfest.jpg')
+festival1.photo.attach(io: sommerpic, filename: 'sommerfest.jpg', content_type: 'image/jpg')
+festival1.save
+
+festival2 = Festival.new(name: "Winter Art Festival", location: "Downtown Gallery", start_date: Date.new(2024, 12, 5), end_date: Date.new(2024, 12, 8))
+winterpic = URI.open('app/assets/images/winterfest.jpg')
+festival2.photo.attach(io: winterpic, filename: 'winterfest.jpg', content_type: 'image/jpg')
+festival2.save
 
 # Create Love Pods
 love_pod1 = LovePod.create!(name: "Chill Zone", description: "A relaxing space for festival-goers to unwind.", capacity: 2)
