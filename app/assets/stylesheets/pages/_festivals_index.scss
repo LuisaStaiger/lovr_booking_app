@@ -10,7 +10,7 @@
   .festival {
     background-color: #fff;
     border: 1px solid $light-blue;
-    padding: 3vw;
+    padding: 4vw;
     margin-bottom: 3vh;
     border-radius: 1.25rem;
     box-shadow: 0 2px 4px rgba(0,0,0,.1);
@@ -23,8 +23,8 @@
 
   img {
     width: 100%;
-    padding: 1vh;
     border-radius: 20px;
+    margin-block: 1vh;
   }
 }
 
@@ -36,6 +36,6 @@
 
   .festival-location,.festival-dates {
     color: #666;
-    margin-top: 1vh;
+    margin-top: 2vh;
   }
 }

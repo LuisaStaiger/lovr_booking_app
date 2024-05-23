@@ -1,32 +1,57 @@
 /* Buttons */
-.button, .btn {
+.butt {
   display: inline-block;
-  background-color: #007bff;
-  color: white;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
+  padding: 12px 18px;
+  padding-top: 12px;
+  padding-right: 18px;
+  padding-bottom: 12px;
+  padding-left: 18px;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
   font-size: 14px;
+  border-radius: 25px;
 }
 
-.button:hover, .btn:hover {
-  background-color: #0056b3;
+.button-check {
+  background-color: $pink;
+  color: white;
+  border: 1px solid #ffffff61;
+  box-shadow: 0px 2px 1px #ecbbba;
 }
 
-.btn-danger {
-  background-color: #dc3545;
+
+.button-check:hover {
+  color: white;
+  box-shadow: none;
+  border: 1px solid #ffffffc7;
+  cursor: pointer;
 }
 
-.btn-danger:hover {
-  background-color: #c82333;
+.button-back {
+  background-color: white;
+  color: $pink;
+  border: 1px solid $pink;
+  box-shadow: 0px 2px 1px #ecbbba;
 }
 
-/* Adjustments for specific links */
-.add-festival-btn {
-  margin: 0 auto 30px auto;
-  display: block;
-  width: fit-content;
+.button-back:hover {
+  color: $pink;
+  box-shadow: none;
+  border: 1px solid $pink;
+  cursor: pointer;
+}
+
+.button-delete, .button-edit {
+  background-color: white;
+  color: $dark-blue;
+  border: 1px solid $dark-blue;
+  box-shadow: 0px 2px 1px $dark-blue;
+}
+
+.button-delete:hover, .button-edit:hover {
+  color: $dark-blue;
+  box-shadow: none;
+  border: 1px solid $dark-blue;
+  cursor: pointer;
 }
