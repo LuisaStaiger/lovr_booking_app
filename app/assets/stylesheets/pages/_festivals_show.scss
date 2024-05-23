@@ -2,12 +2,9 @@
 .festival-details {
   display: flex;
   flex-direction: column;
-  // padding: 1vw;
-
   background-color: #fff;
   border: 1px solid $light-blue;
-  padding: 3vw;
-  margin-bottom: 3vh;
+  padding: 5vw;
   border-radius: 1.25rem;
   box-shadow: 0 2px 4px rgba(0,0,0,.1);
 
@@ -23,7 +20,7 @@
 
   img {
     width: 100%;
-    padding: 1vh;
+    margin-block: 1vh;
     border-radius: 20px;
   }
 }
@@ -45,15 +42,18 @@
   margin-bottom: 3vh;
 }
 
-.love-pods-list {
+.butt-list {
   display: flex;
-  gap: 1vw;
-  row-gap: 1vw;
-  column-gap: 1vw;
   flex-direction: row;
   flex-wrap: wrap;
   align-content: center;
+  justify-content: center;
   padding: 2vw;
+}
+
+.love-pods-list {
+  row-gap: 1vw;
+  column-gap: 1vw;
 
   a {
     text-decoration: none;
@@ -61,17 +61,12 @@
     border-radius: 1.25rem;
     padding: 0.4rem;
   }
-
 }
 
-// ul {
-//   list-style-type: none;
-//   padding: 0;
-// }
-
-// ul li {
-//   padding: 8px 0;
-// }
+.festival-actions {
+  row-gap: 3vw;
+  column-gap: 2vw;
+}
 
 .love-pod {
   background-color: #f8f9fa;
@@ -81,12 +76,4 @@
   margin-bottom: 5px;
   list-style-type: none;
   flex-grow: 1;
-}
-
-.festival-actions {
-  text-align: center;
-}
-
-.festival-actions .button, .festival-actions .btn {
-  margin: 5px;
 }
