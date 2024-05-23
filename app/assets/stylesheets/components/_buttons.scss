@@ -13,7 +13,18 @@
   border-radius: 25px;
 }
 
-.button-check {
+.butt-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  padding: 2vw;
+  row-gap: 3vw;
+  column-gap: 2vw;
+}
+
+.button-pink {
   background-color: $pink;
   color: white;
   border: 1px solid #ffffff61;
@@ -21,37 +32,51 @@
 }
 
 
-.button-check:hover {
+.button-pink:hover {
   color: white;
   box-shadow: none;
   border: 1px solid #ffffffc7;
   cursor: pointer;
 }
 
-.button-back {
+.button-white {
   background-color: white;
   color: $pink;
   border: 1px solid $pink;
   box-shadow: 0px 2px 1px #ecbbba;
 }
 
-.button-back:hover {
+.button-white:hover {
   color: $pink;
   box-shadow: none;
   border: 1px solid $pink;
   cursor: pointer;
 }
 
-.button-delete, .button-edit {
+.button-blue {
   background-color: white;
   color: $dark-blue;
   border: 1px solid $dark-blue;
   box-shadow: 0px 2px 1px $dark-blue;
 }
 
-.button-delete:hover, .button-edit:hover {
+.button-blue:hover {
   color: $dark-blue;
   box-shadow: none;
   border: 1px solid $dark-blue;
+  cursor: pointer;
+}
+
+.button-green {
+  background-color: white;
+  color: $blue-green;
+  border: 1px solid $blue-green;
+  box-shadow: 0px 2px 1px $blue-green;
+}
+
+.button-green:hover {
+  color: $blue-green;
+  box-shadow: none;
+  border: 1px solid $blue-green;
   cursor: pointer;
 }

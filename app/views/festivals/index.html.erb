@@ -1,17 +1,13 @@
 <h1 class="page-title">Festivals</h1>
-<!---->
-<%# if user_signed_in? && current_user.admin? %>
-  <%#= link_to 'Add a Festival',  new_festival_path, class: "button add-festival-btn" %>
-<%# end %>
-
 <div class="festivals-list">
   <% @festivals.each do |festival| %>
-    <div class="festival">
+    <div class="card festival">
       <h2 class="festival-name"><%= link_to festival.name, festival_path(festival) %></h2>
       <div class="festival-description">
         <%= image_tag festival.photo %>
         <p class="festival-location">Location: <%= festival.location %></p>
-        <p class="festival-dates">Dates: <%= festival.start_date %> to <%= festival.end_date %></p>
+        <p class="festival-dates">Dates: <%= festival.start_date.strftime('%a %d %b %Y') %>
+          to <%= festival.end_date.strftime('%a %d %b %Y') %></p>
       </div>
     </div>
   <% end %>

@@ -1,0 +1,20 @@
+.new-booking-container {
+  h2 {
+    color: $blue-green;
+  }
+
+  ul {
+    list-style: none;
+    text-align: center;
+    padding-left: 0px;
+  }
+
+  li {
+    margin-block: 1vh;
+    font-size: 16px;
+  }
+
+  img {
+    margin-bottom: 3vh;
+  }
+}

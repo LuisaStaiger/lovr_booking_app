@@ -1,11 +1,11 @@
 
-<div class="festival-details">
+<div class="card festival-details">
   <%= image_tag @festival.photo %>
   <h2><%= @festival.name %></h2>
 
   <div class="festival-info">
     <p><strong>Location:</strong> <%= @festival.location %></p>
-    <p><strong>Dates:</strong> <%= @festival.start_date %> to <%= @festival.end_date %></p>
+    <p><strong>Dates:</strong> <%= @festival.start_date.strftime('%a %d %b %Y') %> to <%= @festival.end_date.strftime('%a %d %b %Y') %></p>
   </div>
 
   <div class="festival-love-pods">
@@ -22,12 +22,12 @@
   </div>
 
 
-  <div class="butt-list festival-actions">
-    <%= link_to 'Check availability', check_availability_festival_path(@festival), class: 'butt button-check' %>
-    <%= link_to 'Back to Festivals', festivals_path, class: 'butt button-back' %>
+  <div class="butt-list">
+    <%= link_to 'Check availability', check_availability_festival_path(@festival), class: 'butt button-pink' %>
+    <%= link_to 'Back to Festivals', festivals_path, class: 'butt button-white' %>
     <% if user_signed_in? && current_user.admin? %>
-      <%= link_to 'Edit', edit_festival_path(@festival), class: 'butt button-edit' %>
-      <%= link_to 'Delete', festival_path(@festival), method: :delete, data: { confirm: 'Are you sure?' }, class: 'butt button-delete' %>
+      <%= link_to 'Edit', edit_festival_path(@festival), class: 'butt button-blue' %>
+      <%= link_to 'Delete', festival_path(@festival), method: :delete, data: { confirm: 'Are you sure?' }, class: 'butt button-blue' %>
     <% end %>
 
   </div>

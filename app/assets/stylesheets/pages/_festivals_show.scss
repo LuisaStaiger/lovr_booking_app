@@ -1,21 +1,8 @@
 /* Festival Details Page Styles */
 .festival-details {
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  border: 1px solid $light-blue;
-  padding: 5vw;
-  border-radius: 1.25rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,.1);
 
   h2 {
     color: $dark-blue;
-  }
-
-  h3 {
-    color: $blue-green;
-    font-weight: 600;
-    font-size: 18px;
   }
 
   img {
@@ -42,15 +29,6 @@
   margin-bottom: 3vh;
 }
 
-.butt-list {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: center;
-  padding: 2vw;
-}
-
 .love-pods-list {
   row-gap: 1vw;
   column-gap: 1vw;
@@ -61,11 +39,6 @@
     border-radius: 1.25rem;
     padding: 0.4rem;
   }
-}
-
-.festival-actions {
-  row-gap: 3vw;
-  column-gap: 2vw;
 }
 
 .love-pod {

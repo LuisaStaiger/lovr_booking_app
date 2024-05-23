@@ -1,21 +1,22 @@
 <%# This form allows users to re-check availability without going back %>
-<%= form_with url: check_availability_festival_path(@festival), method: :get, local: true do |form| %>
-  <div class="field">
-    <%= form.label :date, "Select Date" %>
-    <%= form.date_field :date, min: @festival.start_date.to_s, max: @festival.end_date.to_s, required: true, value: @date %>
-  </div>
-  <div class="field">
-    <%= form.label :duration, "Duration (minutes)" %>
-    <%= form.select :duration, options_for_select([25, 55], @duration), required: true %>
-  </div>
-  <%= form.submit "Show Available Time Slots", class: 'button' %>
-<% end %>
+<div class="check-container">
+  <%= form_with url: check_availability_festival_path(@festival), method: :get, local: true do |form| %>
+    <div class="field">
+      <%= form.label :date, "Select Date" %>
+      <%= form.date_field :date, min: @festival.start_date.to_s, max: @festival.end_date.to_s, required: true, value: @date %>
+    </div>
+    <div class="field">
+      <%= form.label :duration, "Duration (minutes)" %>
+      <%= form.select :duration, options_for_select([25, 55], @duration), required: true %>
+    </div>
+    <%= form.submit "Show available time slots", class: 'butt button-pink' %>
+  <% end %>
 
 
 
 <%# Displaying the available slots %>
 <% if @date.present? && @duration.present? && @festival_slots.present? %>
-  <h2>Available Time Slots on <%= @date %> :</h2>
+  <h3>Available time slots on <%= Date.parse(@date).strftime('%a %d %b %Y') %> :</h3>
 
   <% filtered_slots = @festival_slots.select do |slot|
     slot.date.to_date == @date.to_date &&
@@ -23,25 +24,30 @@
     !Booking.exists?(available_slot_id: slot.id)
   end.group_by(&:time_frame) %>
 
+  <div class="slots-list">
   <% if filtered_slots.present? %>
-    <ul>
       <% filtered_slots.each do |time_frame, slots| %>
         <% unbooked_slot = slots.find { |slot| !Booking.exists?(available_slot_id: slot.id) } %>
         <% next unless unbooked_slot %>
-        <li>
-          <p>Time Slot: <%= unbooked_slot.time_frame %> (<%= humanized_money_with_symbol(unbooked_slot.price) %>)</p>
+
+        <div class="slot-element">
+          <div class="time-frame"><%= unbooked_slot.time_frame %> (<%= humanized_money_with_symbol(unbooked_slot.price) %>)</div>
           <%= link_to "Book a slot", new_festival_booking_path(festival_id: @festival.id,
             booking_date: unbooked_slot.date, start_time: unbooked_slot.start_time,
             duration: unbooked_slot.duration, available_slot_id: unbooked_slot.id,
-            love_pod: unbooked_slot.love_pod, slots_sku: unbooked_slot.sku, amount: unbooked_slot.price ) %>
-        </li>
+            love_pod: unbooked_slot.love_pod, slots_sku: unbooked_slot.sku, amount: unbooked_slot.price ),
+            class: 'butt button-green'%>
+        </div>
+
       <% end %>
-    </ul>
+  </div>
+
   <% else %>
-    <p>No available slots for the selected date and duration.</p>
+    <p>No available time slots for the selected date and duration.</p>
   <% end %>
 <% else %>
-  <p>No available slots for the selected date and duration.</p>
+  <p>No available time slots for the selected date and duration.</p>
 <% end %>
 
-<%= link_to "Back to festival", festival_path(@festival) %>
+<%= link_to "Back to festival", festival_path(@festival), class: "butt button-white" %>
+</div>
