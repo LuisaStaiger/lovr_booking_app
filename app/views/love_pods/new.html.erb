@@ -1,5 +1,5 @@
 <!-- app/views/love_pods/new.html.erb -->
-<h1>Create New Love Pod</h1>
+<h1 class="page-title">Create a new Love Pod</h1>
 
 <%= form_with(model: @love_pod, local: true) do |form| %>
   <% if @love_pod.errors.any? %>
@@ -42,10 +42,9 @@
       max: 'hh:mm:ss' %>
   </div>
 
-  <div class="actions">
-    <%= form.submit 'Create Love Pod', class: 'btn btn-primary' %>
-  </div>
+  <div class="butt-list">
+    <%= form.submit 'Create Love Pod', class: 'butt button-pink' %>
 
 <% end %>
-
-<%= link_to 'Back to Love Pods', love_pods_path, class: 'btn btn-secondary' %>
+<%= link_to 'Back to Love Pods', love_pods_path, class: 'butt button-white' %>
+  </div>

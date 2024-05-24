@@ -1,4 +1,4 @@
-<h1>New Festival</h1>
+<h1 class="page-title">Add a new festival</h1>
 
 <%= form_with(model: @festival, local: true) do |form| %>
   <% if @festival.errors.any? %>
@@ -43,9 +43,9 @@
     <%#= form.file_field :photo, id: :festival_photo %>
 <!--  </div>-->
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+<div class="butt-list">
+    <%= form.submit class:"butt button-pink" %>
+  <% end %>
 
-<%= link_to 'Back to Festivals', festivals_path %>
+  <%= link_to 'Back to Festivals', festivals_path, class:"butt button-white" %>
+</div>
