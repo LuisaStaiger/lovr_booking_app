@@ -86,3 +86,4 @@ gem 'rack-cors', require: 'rack/cors'
 gem "sassc-rails"
 
 gem 'stripe_event'
+
