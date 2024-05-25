@@ -43,9 +43,6 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-# PostgreSQL for production
-gem "pg", ">= 1.1", group: :production
-
 group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem "sqlite3", "~> 1.4"
@@ -86,3 +83,8 @@ gem 'rack-cors', require: 'rack/cors'
 gem "sassc-rails"
 
 gem 'stripe_event'
+
+group :production do
+  gem 'pg', '>= 0.18', '< 2.0'
+  gem 'rails_12factor'
+end
