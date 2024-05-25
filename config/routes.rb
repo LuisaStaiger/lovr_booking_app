@@ -14,6 +14,9 @@ Rails.application.routes.draw do
     get 'show_from_index', on: :member do
     end
   end
-  
+
   resources :bookings, only: [:destroy]
+
+  mount StripeEvent::Engine, at: '/stripe-webhooks'
+
 end
