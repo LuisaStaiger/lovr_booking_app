@@ -16,14 +16,13 @@ class BookingsController < ApplicationController
   end
 
   def create
-    puts "Stripe secret key: #{ENV['STRIPE_SECRET_KEY']}"
     @booking = Booking.new(booking_params)
     @booking.user = current_user
+    @booking.status = :pending
     if @booking.save
       slot = AvailableSlot.find(params[:booking][:available_slot_id])
       @festival = slot.festival
       @love_pod = slot.love_pod
-      slot_description = "#{slot.date} #{slot.time_frame} #{current_user.email}"
 
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
@@ -31,7 +30,7 @@ class BookingsController < ApplicationController
           price_data: {
             currency: 'eur',
             product_data: {
-              name: slot_description,
+              name: slot.id.to_s,
             },
             unit_amount: slot.price_cents,
           },
