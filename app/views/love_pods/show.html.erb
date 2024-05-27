@@ -1,5 +1,9 @@
 <div class="card">
-  <%= image_tag('round.jpg', alt: 'LOVR Booking App')%>
+  <% if @love_pod.photo.attached? %>
+    <%= cl_image_tag(@love_pod.photo.key) %>
+  <% else %>
+    <%= cl_image_tag(@love_pod.image_url) %>
+  <% end %>
   <h2><%= @love_pod.name %></h1>
 
   <p>

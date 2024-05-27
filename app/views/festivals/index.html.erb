@@ -4,7 +4,11 @@
     <div class="card festival">
       <h2 class="festival-name"><%= link_to festival.name, festival_path(festival) %></h2>
       <div class="festival-description">
-        <%= image_tag festival.photo %>
+          <% if festival.photo.attached? %>
+            <%= cl_image_tag(festival.photo.key) %>
+          <% else %>
+            <%= cl_image_tag(festival.image_url) %>
+          <% end %>
         <p class="festival-location">Location: <%= festival.location %></p>
         <p class="festival-dates">Dates: <%= festival.start_date.strftime('%a %d %b %Y') %>
           to <%= festival.end_date.strftime('%a %d %b %Y') %></p>

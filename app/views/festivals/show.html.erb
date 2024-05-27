@@ -1,6 +1,10 @@
 
 <div class="card festival-details">
-  <%= image_tag @festival.photo %>
+  <% if @festival.photo.attached? %>
+    <%= cl_image_tag(@festival.photo.key) %>
+  <% else %>
+    <%= cl_image_tag(@festival.image_url) %>
+  <% end %>
   <h2><%= @festival.name %></h2>
 
   <div class="festival-info">
