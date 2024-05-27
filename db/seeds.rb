@@ -18,19 +18,21 @@ User.create!(email: "admin@mail.com", password: "123456", admin: true)
 User.create!(email: "user@mail.com", password: "123456")
 
 # Create Festivals
-festival1 = Festival.new(name: "Summer Music Fest", location: "Central Park", start_date: Date.new(2024, 6, 10), end_date: Date.new(2024, 6, 12))
-sommerpic = URI.open('app/assets/images/sommerfest.jpg')
-festival1.photo.attach(io: sommerpic, filename: 'sommerfest.jpg', content_type: 'image/jpg')
-festival1.save
+festival1 = Festival.new(name: "Summer Music Fest", location: "Central Park", start_date: Date.new(2024, 6, 10), end_date: Date.new(2024, 6, 12),
+            image_url: 'https://res.cloudinary.com/dnx58st8e/image/upload/v1716803091/summerfest_isiidj.jpg')
+# sommerpic = URI.open('https://res.cloudinary.com/dnx58st8e/image/upload/v1716803091/summerfest_isiidj.jpg')
+# festival1.photo.attach(io: sommerpic, filename: 'summerfest_isiidj', content_type: 'image/jpg')
+# festival1.save
 
-festival2 = Festival.new(name: "Winter Art Festival", location: "Downtown Gallery", start_date: Date.new(2024, 12, 5), end_date: Date.new(2024, 12, 8))
-winterpic = URI.open('app/assets/images/winterfest.jpg')
-festival2.photo.attach(io: winterpic, filename: 'winterfest.jpg', content_type: 'image/jpg')
-festival2.save
+festival2 = Festival.new(name: "Winter Art Festival", location: "Downtown Gallery", start_date: Date.new(2024, 12, 5), end_date: Date.new(2024, 12, 8),
+            image_url: 'https://res.cloudinary.com/dnx58st8e/image/upload/v1716803091/winterfest_wkc3lb.jpg')
+# winterpic = URI.open('https://res.cloudinary.com/dnx58st8e/image/upload/v1716803091/winterfest_wkc3lb.jpg')
+# festival2.photo.attach(io: winterpic, filename: 'winterfest_wkc3lb.jpg', content_type: 'image/jpg')
+# festival2.save
 
 # Create Love Pods
-love_pod1 = LovePod.create!(name: "Chill Zone", description: "A relaxing space for festival-goers to unwind.", capacity: 2)
-love_pod2 = LovePod.create!(name: "Dance Sphere", description: "An energetic area for dancing and music.", capacity: 2)
+love_pod1 = LovePod.create!(name: "Chill Zone", description: "A relaxing space for festival-goers to unwind.", capacity: 2, image_url: 'https://res.cloudinary.com/dnx58st8e/image/upload/v1716803091/round_igj3nt.jpg')
+love_pod2 = LovePod.create!(name: "Dance Sphere", description: "An energetic area for dancing and music.", capacity: 2, image_url: 'https://res.cloudinary.com/dnx58st8e/image/upload/v1716803091/round_igj3nt.jpg')
 
 # Link Festivals and Love Pods using FestivalLovePods
 FestivalLovePod.create!(festival: festival1, love_pod: love_pod1)

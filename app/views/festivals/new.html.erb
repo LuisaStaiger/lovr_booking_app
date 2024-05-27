@@ -38,10 +38,10 @@
     <%= form.collection_select :love_pod_ids, LovePod.all, :id, :name, {}, {multiple: true, size: 10} %>
   </div>
 
-<!--  <div class="field">-->
-    <%#= form.label :photo %>
-    <%#= form.file_field :photo, id: :festival_photo %>
-<!--  </div>-->
+  <div class="field">
+    <%= form.label :photo %>
+    <%= form.file_field :photo, id: :festival_photo %>
+  </div>
 
 <div class="butt-list">
     <%= form.submit class:"butt button-pink" %>

@@ -1,6 +1,6 @@
 <div class="card new-booking-container">
   <h2>Booking details</h2>
-  <%= image_tag('inside.jpg', alt: 'LOVR Booking App')%>
+  <%= cl_image_tag('inside_rjl6tp')%>
   <ul>
     <li><strong>Date:</strong> <%= @booking.booking_date.strftime('%a %d %b %Y') %></li>
     <li><strong>Start time:</strong> <%= @booking.start_time.strftime('%I:%M:%S %p') %></li>

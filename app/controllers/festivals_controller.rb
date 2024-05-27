@@ -129,10 +129,12 @@ class FestivalsController < ApplicationController
   end
 
   def festival_params
-    params.require(:festival).permit(:name, :location, :start_date, :end_date, love_pod_ids: [], available_slot_ids: [])
+    params.require(:festival).permit(:name, :location, :start_date, :end_date, :photo,
+    love_pod_ids: [], available_slot_ids: [])
   end
 
   def available_slot_params
-    params.require(:available_slot).permit(:date, :time_frame, :start_time, :duration, :festival_id, :love_pod_id)
+    params.require(:available_slot).permit(:date, :time_frame, :start_time, :duration,
+    :festival_id, :love_pod_id)
   end
 end

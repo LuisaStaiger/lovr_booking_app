@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_22_133502) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_27_102723) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -86,6 +86,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_22_133502) do
     t.date "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image_url"
   end
 
   create_table "love_pods", force: :cascade do |t|
@@ -98,6 +99,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_22_133502) do
     t.integer "duration_55", default: 55
     t.time "availabilty_start_time", default: "2000-01-01 09:00:00"
     t.time "availabilty_end_time", default: "2000-01-01 23:00:00"
+    t.string "image_url"
   end
 
   create_table "users", force: :cascade do |t|
