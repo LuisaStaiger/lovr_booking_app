@@ -1,7 +1,7 @@
-class AddAdminToUsers < ActiveRecord::Migration[7.1]
+class RemoveAdminFromUsers < ActiveRecord::Migration[7.1]
   def change
-    unless ActiveRecord::Base.connection.column_exists?(:users, :admin)
-      add_column :users, :admin, :boolean, default: false
+    if ActiveRecord::Base.connection.column_exists?(:users, :admin)
+      remove_column :users, :admin, :boolean
     end
   end
 end
