@@ -42,6 +42,11 @@
       max: 'hh:mm:ss' %>
   </div>
 
+    <div class="field">
+    <%= form.label :photo %>
+    <%= form.file_field :photo, id: :love_pod_photo %>
+  </div>
+
   <div class="butt-list">
     <%= form.submit 'Create Love Pod', class: 'butt button-pink' %>
 

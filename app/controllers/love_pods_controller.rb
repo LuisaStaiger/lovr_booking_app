@@ -50,6 +50,7 @@ class LovePodsController < ApplicationController
 
     def love_pod_params
       params.require(:love_pod).permit(:name, :description, :capacity,
-                                      :availabilty_start_time, :availabilty_end_time)
+                                      :availabilty_start_time, :availabilty_end_time,
+                                      :photo)
     end
 end
