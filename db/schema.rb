@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_27_122641) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_28_123343) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -65,6 +65,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_27_122641) do
     t.string "slots_sku"
     t.string "checkout_session_id"
     t.integer "amount_cents", default: 0, null: false
+    t.integer "status", default: 0
     t.index ["available_slot_id"], name: "index_bookings_on_available_slot_id"
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end

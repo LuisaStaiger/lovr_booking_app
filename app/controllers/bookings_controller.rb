@@ -18,10 +18,11 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     @booking.user = current_user
-    @booking.status = :pending
+    #@booking.status = :pending
     if @booking.save
       slot = AvailableSlot.find(params[:booking][:available_slot_id])
       @festival = slot.festival
+      festival = @festival
       @love_pod = slot.love_pod
 
       session = Stripe::Checkout::Session.create(
@@ -37,17 +38,17 @@ class BookingsController < ApplicationController
           quantity: 1,
         }],
         mode: 'payment',
-        success_url: festival_booking_url(@festival, @booking),
-        cancel_url: festival_booking_url(@festival, @booking)
+        success_url: user_bookings_url,
+        cancel_url: check_availability_festival_url(festival)
       )
 
       puts "Stripe Checkout Session: #{session.inspect}"
 
-      @booking.update(checkout_session_id: session.id)
+      @booking.update(checkout_session_id: session.id, status: 1)
       redirect_to session.url, allow_other_host: true
     else
       flash.now[:alert] = 'Failed to create booking.'
-      render :new
+      redirect_to new_festival_booking_path(@festival, @booking)
     end
   end
 

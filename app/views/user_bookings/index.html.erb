@@ -2,21 +2,19 @@
 <h1>My Bookings</h1>
 
 <% if @bookings.any? %>
-  <ul>
-    <% @slots_booked.each do |slot| %>
-      <li>
-        <strong>Festival:</strong> <%= slot.festival.name %><br>
-        <strong>Location:</strong> <%= slot.festival.location %><br>
-        <strong>Date:</strong> <%= slot.date %><br>
-        <strong>Start Time:</strong> <%= slot.start_time.strftime("%I:%M%p") %><br>
-        <strong>Duration:</strong> <%= slot.duration %> minutes<br>
-        <strong>Status:</strong> <%= slot.booking.status %><br>
-        <strong>Love Pod:</strong> <%= slot.love_pod.name %><br>
-        <strong>Description:</strong> <%= slot.love_pod.description %><br>
-        <strong>Capacity:</strong> <%= slot.love_pod.capacity %>
-      </li>
-        <%= link_to "Cancel booking", booking_path(slot.booking.id),
-        method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'  %>
+    <% @bookings.select do |booking| %>
+      <% booking = booking.status == 1 %>
+    <% end %>
+
+      <ul>
+      <% @bookings.each do |booking| %>
+          <li><strong>Date:</strong> <%= booking.booking_date.strftime('%a %d %b %Y') %></li>
+          <li><strong>Start time:</strong> <%= booking.start_time.strftime('%I:%M:%S %p') %></li>
+          <li><strong>Duration:</strong> <%= booking.duration %> minutes</li>
+          <li><strong>Love Pod:</strong> <%= booking.available_slot.love_pod.name %></li>
+          <li><strong>Price:</strong> <%= humanized_money_with_symbol(booking.amount) %></li>
+          <%= link_to "Cancel booking", booking_path(booking.id),
+          method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'  %>
     <% end %>
   </ul>
 <% else %>
