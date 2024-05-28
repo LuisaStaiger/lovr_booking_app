@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :festivals do
     get 'check_availability', on: :member do
     end
-    resources :bookings, only: [:new, :create, :show]
+    resources :bookings, only: [:new, :create] 
     resources :love_pods, only: [:show]
   end
 
