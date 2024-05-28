@@ -18,8 +18,8 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     @booking.user = current_user
-    #@booking.status = :pending
     if @booking.save
+      booking = @booking
       slot = AvailableSlot.find(params[:booking][:available_slot_id])
       @festival = slot.festival
       festival = @festival
@@ -31,9 +31,10 @@ class BookingsController < ApplicationController
           price_data: {
             currency: 'eur',
             product_data: {
-              name: slot.id.to_s,
+              name: "#{booking.booking_date.strftime('%a %d %b %Y')} - #{booking.start_time.strftime('%I:%M:%S %p')}",
+              description: "#{booking.duration} minutes in #{booking.available_slot.love_pod.name}",
             },
-            unit_amount: slot.price_cents,
+            unit_amount: booking.amount_cents,
           },
           quantity: 1,
         }],
