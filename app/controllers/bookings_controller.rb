@@ -44,7 +44,7 @@ class BookingsController < ApplicationController
 
       puts "Stripe Checkout Session: #{session.inspect}"
 
-      @booking.update(checkout_session_id: session.id, status: 1)
+      @booking.update(checkout_session_id: session.id)
       redirect_to session.url, allow_other_host: true
     else
       flash.now[:alert] = 'Failed to create booking.'
