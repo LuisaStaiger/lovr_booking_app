@@ -3,10 +3,7 @@ class UserBookingsController < ApplicationController
 
   def index
     @bookings = current_user.bookings
-    # @slots_booked = []
-    # @bookings.each do |booking|
-    #   @slots_booked << AvailableSlot.find(booking.available_slot_id)
-    # end
+    @confirmed_bookings = @bookings.where(status: 1)
   end
 
   def destroy

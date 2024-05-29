@@ -1,24 +1,21 @@
-<!-- app/views/user_bookings/index.html.erb -->
-<h1>My Bookings</h1>
+<h1>My upcoming bookings</h1>
 
-<% if @bookings.any? %>
-    <% @bookings.select do |booking| %>
-      <% booking.status == 1 %>
-    <% end %>
-
-      <ul>
-      <% @bookings.each do |booking| %>
-          <li><strong>Festival:</strong> <%= booking.available_slot.festival.name %></li>
-          <li><strong>Date:</strong> <%= booking.booking_date.strftime('%a %d %b %Y') %></li>
-          <li><strong>Start time:</strong> <%= booking.start_time.strftime('%I:%M:%S %p') %></li>
-          <li><strong>Duration:</strong> <%= booking.duration %> minutes</li>
-          <li><strong>Love Pod:</strong> <%= booking.available_slot.love_pod.name %></li>
-          <li><strong>Satus:</strong> <%= booking.status %></li>
-          <li><strong>Price:</strong> <%= humanized_money_with_symbol(booking.amount) %></li>
-          <%= link_to "Cancel booking", booking_path(booking.id),
-          method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'  %>
-    <% end %>
-  </ul>
+<% if @confirmed_bookings.any? %>
+        <% @confirmed_bookings.each do |booking| %>
+            <li><strong>Festival:</strong> <%= booking.available_slot.festival.name %></li>
+            <li><strong>Date:</strong> <%= booking.booking_date.strftime('%a %d %b %Y') %></li>
+            <li><strong>Start time:</strong> <%= booking.start_time.strftime('%I:%M:%S %p') %></li>
+            <li><strong>Duration:</strong> <%= booking.duration %> minutes</li>
+            <li><strong>Love Pod:</strong> <%= booking.available_slot.love_pod.name %></li>
+            <li><strong>Status:</strong> <%= booking.status %></li>
+            <li><strong>Price:</strong> <%= humanized_money_with_symbol(booking.amount) %></li>
+            <%= link_to "Cancel booking", booking_path(booking.id),
+            method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'  %>
+        <% end %>
+        </ul>
 <% else %>
-  <p>You don't have any bookings.</p>
+    <p>You don't have any upcoming bookings.</p>
 <% end %>
+
+<h3>My past bookings</h1>
+<p>You don't have any past bookings.</p>

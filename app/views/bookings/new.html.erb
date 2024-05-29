@@ -16,6 +16,7 @@
     <%= form.hidden_field :duration %>
     <%= form.hidden_field :available_slot_id, value: @available_slot.id %>
     <%= form.hidden_field :festival_id %>
+    <%= form.hidden_field :amount %>
 
   <div class="butt-list">
     <%= form.submit "Confirm booking & pay", class: 'butt button-pink' %>
