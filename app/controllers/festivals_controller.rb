@@ -45,7 +45,7 @@ class FestivalsController < ApplicationController
 
   def check_availability
     @festival = Festival.find(params[:id])
-    @date = params[:date]
+    @date = params[:booking_date]
     @duration = params[:duration].to_i
     if @date.present? && @duration.present?
       @festival_slots

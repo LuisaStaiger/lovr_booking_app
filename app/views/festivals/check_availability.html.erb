@@ -3,7 +3,7 @@
   <%= form_with url: check_availability_festival_path(@festival), method: :get, local: true do |form| %>
     <div class="field">
       <%= form.label :date, "Select Date" %>
-      <%= form.date_field :date, min: @festival.start_date.to_s, max: @festival.end_date.to_s, required: true, value: @date %>
+      <%= form.date_field :booking_date, min: @festival.start_date.to_s, max: @festival.end_date.to_s, required: true, value: @date %>
     </div>
     <div class="field">
       <%= form.label :duration, "Duration (minutes)" %>

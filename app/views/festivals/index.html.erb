@@ -9,9 +9,9 @@
           <% else %>
             <%= cl_image_tag(festival.image_url) %>
           <% end %>
-        <p class="festival-location">Location: <%= festival.location %></p>
-        <p class="festival-dates">Dates: <%= festival.start_date.strftime('%a %d %b %Y') %>
+        <p class="festival-dates"><%= festival.start_date.strftime('%a %d %b %Y') %>
           to <%= festival.end_date.strftime('%a %d %b %Y') %></p>
+        <p class="festival-location"><%= festival.location %></p>
       </div>
     </div>
   <% end %>
