@@ -9,21 +9,22 @@
     <li><strong>Price:</strong> <%= humanized_money_with_symbol(@booking.amount) %></li>
   </ul>
 
-
   <%= form_with model: @booking, url: festival_bookings_path(@festival), method: :post, local: true, data: { turbo: false } do |form| %>
     <%= form.hidden_field :booking_date %>
     <%= form.hidden_field :start_time %>
     <%= form.hidden_field :duration %>
     <%= form.hidden_field :available_slot_id, value: @available_slot.id %>
-    <%= form.hidden_field :festival_id %>
     <%= form.hidden_field :amount %>
 
   <div class="butt-list">
     <%= form.submit "Confirm booking & pay", class: 'butt button-pink' %>
   <% end %>
 
-    <%#= link_to "Cancel booking", booking_path(@booking) %>
-    <%= link_to "Back to available time slots", check_availability_festival_path(@festival), class: "butt button-white" %>
-  </div>
+  <%= form_with url: check_availability_festival_path(@festival), method: :get, local: true do |form|  %>
+    <%= form.hidden_field :booking_date, value: @booking.booking_date.to_s %>
+    <%= form.hidden_field :duration, value: @booking.duration %>
+    <%= form.submit "Back to available time slots", class: "butt button-white" %>
+  <% end %>
 
-    </div>
+  </div>
+</div>

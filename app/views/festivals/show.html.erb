@@ -8,8 +8,8 @@
   <h2><%= @festival.name %></h2>
 
   <div class="festival-info">
-    <p><strong>Location:</strong> <%= @festival.location %></p>
     <p><strong>Dates:</strong> <%= @festival.start_date.strftime('%a %d %b %Y') %> to <%= @festival.end_date.strftime('%a %d %b %Y') %></p>
+    <p><strong>Location:</strong> <%= @festival.location %></p>
   </div>
 
   <div class="festival-love-pods">

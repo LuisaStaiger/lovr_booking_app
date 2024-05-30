@@ -4,6 +4,7 @@ class UserBookingsController < ApplicationController
   def index
     @bookings = current_user.bookings
     @confirmed_bookings = @bookings.where(status: 1)
+    @pending_bookings = @bookings.where(status: 0)
   end
 
   def destroy
