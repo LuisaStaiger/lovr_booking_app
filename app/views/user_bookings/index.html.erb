@@ -1,16 +1,18 @@
-<% if @confirmed_bookings.any? && @pending_bookings.any? %>
+<div class="booking-container">
+  <% if @confirmed_bookings.any? && @pending_bookings.any? %>
   <%= render "pending_booking_details" %>
   <%= render "confirmed_booking_details" %>
 
-<% elsif @pending_bookings.any? %>
-  <%= render "pending_booking_details" %>
+  <% elsif @pending_bookings.any? %>
+    <%= render "pending_booking_details" %>
 
-<% elsif @confirmed_bookings.any? %>
-  <%= render "confirmed_booking_details" %>
+  <% elsif @confirmed_bookings.any? %>
+    <%= render "confirmed_booking_details" %>
 
-<% else %>
-  <p>You don't have any upcoming bookings.</p>
-<% end %>
+  <% else %>
+    <p>You don't have any upcoming bookings.</p>
+  <% end %>
 
-<h3>My past bookings</h1>
-<p>You don't have any past bookings.</p>
+  <h3>My past bookings</h3>
+  <p>You don't have any past bookings.</p>
+</div>

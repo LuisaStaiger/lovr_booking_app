@@ -31,7 +31,6 @@
   box-shadow: 0px 2px 1px #ecbbba;
 }
 
-
 .button-pink:hover {
   color: white;
   box-shadow: none;
@@ -50,6 +49,20 @@
   color: $pink;
   box-shadow: none;
   border: 1px solid $pink;
+  cursor: pointer;
+}
+
+.button-blue-filled {
+  background-color: $dark-blue;
+  color: white;
+  border: 1px solid $dark-blue;
+  box-shadow: 0px 2px 1px $dark-blue;
+}
+
+.button-blue-filled:hover {
+  color: white;
+  box-shadow: none;
+  border: 1px solid #ffffffc7;
   cursor: pointer;
 }
 
