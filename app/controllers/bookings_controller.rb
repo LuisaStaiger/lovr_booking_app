@@ -10,7 +10,7 @@ class BookingsController < ApplicationController
       available_slot_id: params[:available_slot_id],
       user: current_user,
       slots_sku: params[:slots_sku],
-      amount: params[:amount]
+      amount: params[:amount],
     )
     @available_slot = AvailableSlot.find(params[:available_slot_id])
   end
