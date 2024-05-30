@@ -9,7 +9,6 @@
     <li><strong>Price:</strong> <%= humanized_money_with_symbol(@booking.amount) %></li>
   </ul>
 
-
   <%= form_with model: @booking, url: festival_bookings_path(@festival), method: :post, local: true, data: { turbo: false } do |form| %>
     <%= form.hidden_field :booking_date %>
     <%= form.hidden_field :start_time %>
