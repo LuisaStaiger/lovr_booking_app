@@ -1,20 +1,20 @@
+<div class="card booking-details">
+  <% @confirmed_bookings.each do |booking| %>
+    <p><strong>Festival:</strong> <%= booking.available_slot.festival.name %></p>
+    <p><strong>Date:</strong> <%= booking.booking_date.strftime('%a %d %b %Y') %></p>
+    <p><strong>Start time:</strong> <%= booking.start_time.strftime('%I:%M:%S %p') %></p>
+    <p><strong>Duration:</strong> <%= booking.duration %> minutes</p>
+    <p><strong>Love Pod:</strong> <%= booking.available_slot.love_pod.name %></p>
+    <p><strong>Status:</strong> <%= booking.status %></p>
+    <p><strong>Price:</strong> <%= humanized_money_with_symbol(booking.amount) %></p>
 
-  <h3>My confirmed bookings</h3>
-
-    <div class="card booking-details">
-      <% @confirmed_bookings.each do |booking| %>
-        <p><strong>Festival:</strong> <%= booking.available_slot.festival.name %></p>
-        <p><strong>Date:</strong> <%= booking.booking_date.strftime('%a %d %b %Y') %></p>
-        <p><strong>Start time:</strong> <%= booking.start_time.strftime('%I:%M:%S %p') %></p>
-        <p><strong>Duration:</strong> <%= booking.duration %> minutes</p>
-        <p><strong>Love Pod:</strong> <%= booking.available_slot.love_pod.name %></p>
-        <p><strong>Status:</strong> <%= booking.status %></p>
-        <p><strong>Price:</strong> <%= humanized_money_with_symbol(booking.amount) %></p>
-
-        <div class="butt-list">
-          <%= link_to "Cancel booking", booking_path(booking.id),
-              method: :delete, data: { confirm: 'Are you sure?' }, class: 'butt button-white'  %>
-        </div>
-      <% end %>
-
+    <div class="butt-list">
+      <%= link_to "Cancel booking", booking_path(booking.id),
+          method: :delete, data: { confirm: 'Are you sure?' }, class: 'butt button-white'  %>
     </div>
+  <% end %>
+
+</div>
+
+
+
