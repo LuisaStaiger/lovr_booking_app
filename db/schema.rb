@@ -60,7 +60,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_28_123343) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "duration"
-    t.datetime "start_time"
     t.integer "available_slot_id"
     t.string "slots_sku"
     t.string "checkout_session_id"
