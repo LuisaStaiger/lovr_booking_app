@@ -1,26 +1,53 @@
-<h1>My pending bookings</h1>
-
 <% @pending_bookings.each do |booking| %>
-  <li><strong>Festival:</strong> <%= booking.available_slot.festival.name %></li>
-  <li><strong>Date:</strong> <%= booking.booking_date.strftime('%a %d %b %Y') %></li>
-  <li><strong>Start time:</strong> <%= booking.start_time.strftime('%I:%M:%S %p') %></li>
-  <li><strong>Duration:</strong> <%= booking.duration %> minutes</li>
-  <li><strong>Love Pod:</strong> <%= booking.available_slot.love_pod.name %></li>
-  <li><strong>Status:</strong> <%= booking.status %></li>
-  <li><strong>Price:</strong> <%= humanized_money_with_symbol(booking.amount) %></li>
+  <div class="card book-card booking-details">
+    <p><strong>Festival:</strong> <%= booking.available_slot.festival.name %></p>
+    <p><strong>Date:</strong> <%= booking.booking_date.strftime('%a %d %b %Y') %></p>
+    <p><strong>Start time:</strong> <%= booking.start_time.strftime('%I:%M:%S %p') %></p>
+    <p><strong>Duration:</strong> <%= booking.duration %> minutes</p>
+    <p><strong>Love Pod:</strong> <%= booking.available_slot.love_pod.name %></p>
+    <p><strong>Price:</strong> <%= humanized_money_with_symbol(booking.amount) %></p>
+    <p><strong>Status: <span class="pending"><%= booking.status %></span></strong></p>
 
-  <button id="pay" class="butt">Confirm booking & pay</button>
-  <script src="https://js.stripe.com/v3/"></script>
-  <script>
-    const paymentButton = document.getElementById('pay');
-    paymentButton.addEventListener('click', () => {
-      const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
-      stripe.redirectToCheckout({
-        sessionId: '<%= booking.checkout_session_id %>'
-      });
-    });
-  </script>
+    <% countdown_end_time = booking.created_at + 30.minutes %>
+    <% countdown_remaining_seconds = [countdown_end_time - Time.current, 0].max.to_i %>
 
-  <%= link_to "Cancel booking", booking_path(booking.id),
-      method: :delete, data: { confirm: 'Are you sure?' }, class: 'butt'  %>
+    <p><strong>Time before cancellation:</strong> <span id="countdown-<%= booking.id %>"></span></p>
+
+    <div>
+      <button id="pay-<%= booking.id %>" class="butt button-blue-filled">Pay & confirm booking</button>
+      <script src="https://js.stripe.com/v3/"></script>
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const paymentButton = document.getElementById('pay-<%= booking.id %>');
+          paymentButton.addEventListener('click', () => {
+            const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
+            stripe.redirectToCheckout({
+              sessionId: '<%= booking.checkout_session_id %>'
+            });
+          });
+
+          const countdownElement = document.getElementById('countdown-<%= booking.id %>');
+          let remainingSeconds = <%= countdown_remaining_seconds %>;
+
+          const updateCountdown = () => {
+            if (remainingSeconds > 0) {
+              const minutes = Math.floor(remainingSeconds / 60);
+              const seconds = remainingSeconds % 60;
+              countdownElement.innerText = `${minutes}m ${seconds}s`;
+              remainingSeconds -= 1;
+            } else {
+              countdownElement.innerText = 'Expired';
+              paymentButton.disabled = true;
+            }
+          };
+
+          updateCountdown();
+          setInterval(updateCountdown, 1000);
+        });
+      </script>
+
+      <%= link_to "Cancel booking", booking_path(booking.id),
+          method: :delete, data: { confirm: 'Are you sure?' }, class: 'butt button-blue'  %>
+    </div>
+  </div>
 <% end %>

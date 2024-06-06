@@ -64,7 +64,7 @@ class BookingsController < ApplicationController
         quantity: 1,
         }],
         metadata: {
-          expires_at: (Time.now + 30.minutes).to_i},
+          expires_at: (Time.now.to_i + 1800)},
           mode: 'payment',
           success_url: user_bookings_url,
           cancel_url: check_availability_festival_url(festival)

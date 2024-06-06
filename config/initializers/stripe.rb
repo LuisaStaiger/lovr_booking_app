@@ -1,5 +1,4 @@
 require_relative '../../app/services/stripe_checkout_session_service'
-require_relative '../../app/services/stripe_checkout_session_expiration_service'
 
 Rails.configuration.stripe = {
   publishable_key: ENV['STRIPE_PUBLISHABLE_KEY'],
@@ -13,5 +12,4 @@ StripeEvent.signing_secret = Rails.configuration.stripe[:signing_secret]
 
 StripeEvent.configure do |events|
   events.subscribe 'checkout.session.completed', StripeCheckoutSessionService.new
-  events.subscribe 'checkout.session.expired', StripeCheckoutSessionExpirationService.new
 end

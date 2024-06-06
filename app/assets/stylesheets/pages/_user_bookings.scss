@@ -1,0 +1,28 @@
+.booking-container {
+  h3 {
+    color: $dark-blue;
+    margin-top: 2vh;
+    text-align: center;
+    margin-bottom: 3vh;
+  }
+
+  p {
+    line-height: 0.8;
+  }
+
+  .book-card {
+    margin-bottom: 6vh;
+    padding-inline: 3vw;
+  }
+
+  .button-blue-filled {
+    margin-bottom: 1vh;
+  }
+}
+.pending{
+  color: $dark-blue
+}
+
+.confirmed {
+  color: $blue-green
+}
