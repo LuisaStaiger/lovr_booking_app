@@ -5,8 +5,8 @@
     <p><strong>Start time:</strong> <%= booking.start_time.strftime('%I:%M:%S %p') %></p>
     <p><strong>Duration:</strong> <%= booking.duration %> minutes</p>
     <p><strong>Love Pod:</strong> <%= booking.available_slot.love_pod.name %></p>
-    <p><strong>Status: <span class="confirmed"><%= booking.status %></span></strong></p>
     <p><strong>Price:</strong> <%= humanized_money_with_symbol(booking.amount) %></p>
+    <p><strong>Status: <span class="confirmed"><%= booking.status %></span></strong></p>
 
     <div>
       <%= link_to "Cancel booking", booking_path(booking.id),

@@ -5,19 +5,44 @@
     <p><strong>Start time:</strong> <%= booking.start_time.strftime('%I:%M:%S %p') %></p>
     <p><strong>Duration:</strong> <%= booking.duration %> minutes</p>
     <p><strong>Love Pod:</strong> <%= booking.available_slot.love_pod.name %></p>
-    <p><strong>Status: <span class="pending"><%= booking.status %></span></strong></p>
     <p><strong>Price:</strong> <%= humanized_money_with_symbol(booking.amount) %></p>
+    <p><strong>Status: <span class="pending"><%= booking.status %></span></strong></p>
+
+    <% countdown_end_time = booking.created_at + 30.minutes %>
+    <% countdown_remaining_seconds = [countdown_end_time - Time.current, 0].max.to_i %>
+
+    <p><strong>Time before cancellation:</strong> <span id="countdown-<%= booking.id %>"></span></p>
 
     <div>
-      <button id="pay" class="butt button-blue-filled">Confirm booking & pay</button>
+      <button id="pay-<%= booking.id %>" class="butt button-blue-filled">Pay & confirm booking</button>
       <script src="https://js.stripe.com/v3/"></script>
       <script>
-        const paymentButton = document.getElementById('pay');
-        paymentButton.addEventListener('click', () => {
-          const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
-          stripe.redirectToCheckout({
-            sessionId: '<%= booking.checkout_session_id %>'
+        document.addEventListener('DOMContentLoaded', () => {
+          const paymentButton = document.getElementById('pay-<%= booking.id %>');
+          paymentButton.addEventListener('click', () => {
+            const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
+            stripe.redirectToCheckout({
+              sessionId: '<%= booking.checkout_session_id %>'
+            });
           });
+
+          const countdownElement = document.getElementById('countdown-<%= booking.id %>');
+          let remainingSeconds = <%= countdown_remaining_seconds %>;
+
+          const updateCountdown = () => {
+            if (remainingSeconds > 0) {
+              const minutes = Math.floor(remainingSeconds / 60);
+              const seconds = remainingSeconds % 60;
+              countdownElement.innerText = `${minutes}m ${seconds}s`;
+              remainingSeconds -= 1;
+            } else {
+              countdownElement.innerText = 'Expired';
+              paymentButton.disabled = true;
+            }
+          };
+
+          updateCountdown();
+          setInterval(updateCountdown, 1000);
         });
       </script>
 

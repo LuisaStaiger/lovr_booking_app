@@ -17,7 +17,7 @@
     <%= form.hidden_field :amount %>
 
   <div class="butt-list">
-    <%= form.submit "Confirm booking & pay", class: 'butt button-pink' %>
+    <%= form.submit "Pay & confirm booking", class: 'butt button-pink' %>
   <% end %>
 
   <%= form_with url: check_availability_festival_path(@festival), method: :get, local: true do |form|  %>

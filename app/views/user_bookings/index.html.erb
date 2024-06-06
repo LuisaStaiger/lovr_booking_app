@@ -1,5 +1,6 @@
 <div class="booking-container">
   <% if @confirmed_bookings.any? && @pending_bookings.any? %>
+    
     <h1 class="page-title">My confirmed bookings</h1>
       <%= render "confirmed_booking_details" %>
     <h3>My pending bookings</h3>

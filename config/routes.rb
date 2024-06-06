@@ -18,5 +18,4 @@ Rails.application.routes.draw do
   resources :bookings, only: [:destroy]
 
   mount StripeEvent::Engine, at: '/stripe-webhooks'
-
 end
