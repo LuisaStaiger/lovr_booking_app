@@ -1,14 +1,14 @@
-<div class="card booking-details">
-  <% @pending_bookings.each do |booking| %>
+<% @pending_bookings.each do |booking| %>
+  <div class="card book-card booking-details">
     <p><strong>Festival:</strong> <%= booking.available_slot.festival.name %></p>
     <p><strong>Date:</strong> <%= booking.booking_date.strftime('%a %d %b %Y') %></p>
     <p><strong>Start time:</strong> <%= booking.start_time.strftime('%I:%M:%S %p') %></p>
     <p><strong>Duration:</strong> <%= booking.duration %> minutes</p>
     <p><strong>Love Pod:</strong> <%= booking.available_slot.love_pod.name %></p>
-    <p><strong>Status:</strong> <%= booking.status %></p>
+    <p><strong>Status: <span class="pending"><%= booking.status %></span></strong></p>
     <p><strong>Price:</strong> <%= humanized_money_with_symbol(booking.amount) %></p>
 
-    <div class="butt-list">
+    <div>
       <button id="pay" class="butt button-blue-filled">Confirm booking & pay</button>
       <script src="https://js.stripe.com/v3/"></script>
       <script>
@@ -24,6 +24,5 @@
       <%= link_to "Cancel booking", booking_path(booking.id),
           method: :delete, data: { confirm: 'Are you sure?' }, class: 'butt button-blue'  %>
     </div>
-  <% end %>
-
-</div>
+  </div>
+<% end %>
