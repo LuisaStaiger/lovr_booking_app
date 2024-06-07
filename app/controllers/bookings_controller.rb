@@ -67,7 +67,8 @@ class BookingsController < ApplicationController
           expires_at: (Time.now.to_i + 1800)},
           mode: 'payment',
           success_url: user_bookings_url,
-          cancel_url: check_availability_festival_url(festival)
+          cancel_url: check_availability_festival_url(festival,
+          booking_date: booking.booking_date.to_s, duration: booking.duration)
           )
 
     @booking.update(checkout_session_id: session.id)
