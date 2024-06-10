@@ -19,10 +19,18 @@
     margin-bottom: 1vh;
   }
 }
-.pending{
+.pending-status {
   color: $dark-blue
 }
 
-.confirmed {
+.confirmed-status {
   color: $blue-green
+}
+
+.pending-link {
+  color: $dark-blue;
+}
+
+.pending-link:hover {
+  color: $darker-blue;
 }

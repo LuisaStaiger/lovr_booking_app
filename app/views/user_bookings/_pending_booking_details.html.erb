@@ -1,12 +1,13 @@
 <% @pending_bookings.each do |booking| %>
   <div class="card book-card booking-details">
-    <p><strong>Festival:</strong> <%= booking.available_slot.festival.name %></p>
+    <p><strong>Festival:</strong> <%= link_to booking.available_slot.festival.name, festival_path(booking.available_slot.festival), class: "pending-link" %></p>
     <p><strong>Date:</strong> <%= booking.booking_date.strftime('%a %d %b %Y') %></p>
     <p><strong>Start time:</strong> <%= booking.start_time.strftime('%I:%M:%S %p') %></p>
     <p><strong>Duration:</strong> <%= booking.duration %> minutes</p>
-    <p><strong>Love Pod:</strong> <%= booking.available_slot.love_pod.name %></p>
+    <p><strong>Love Pod:</strong> <%= link_to booking.available_slot.love_pod.name,
+                                  festival_love_pod_path(booking.available_slot.festival.id, booking.available_slot.love_pod), class: "pending-link" %></p>
     <p><strong>Price:</strong> <%= humanized_money_with_symbol(booking.amount) %></p>
-    <p><strong>Status: <span class="pending"><%= booking.status %></span></strong></p>
+    <p><strong>Status: <span class="pending-status"><%= booking.status %></span></strong></p>
 
     <% countdown_end_time = booking.created_at + 30.minutes %>
     <% countdown_remaining_seconds = [countdown_end_time - Time.current, 0].max.to_i %>
