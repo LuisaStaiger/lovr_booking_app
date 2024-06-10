@@ -16,7 +16,7 @@
 
 <%# Displaying the available slots %>
 <% if @date.present? && @duration.present? && @festival_slots.present? %>
-  <h3>Available time slots on <%= Date.parse(@date).strftime('%a %d %b %Y') %> :</h3>
+  <h3>Available time slots on <%= Date.parse(@date).strftime('%a %d %b %Y') %>:</h3>
 
   <% filtered_slots = @festival_slots.select do |slot|
     slot.date.to_date == @date.to_date &&
