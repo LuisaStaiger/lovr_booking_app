@@ -3,7 +3,7 @@
   <%= form_with url: check_availability_festival_path(@festival), method: :get, local: true do |form| %>
     <div class="field">
       <%= form.label :date, "Select Date" %>
-      <%= form.date_field :booking_date, min: @festival.start_date.to_s, max: @festival.end_date.to_s, required: true, value: @date %>
+      <%= form.select :booking_date, options_for_select(@date_options, @date), required: true %>
     </div>
     <div class="field">
       <%= form.label :duration, "Duration (minutes)" %>
@@ -11,7 +11,7 @@
     </div>
     <%= form.submit "Show available time slots", class: 'butt button-pink' %>
   <% end %>
-
+</div>
 
 
 <%# Displaying the available slots %>
@@ -22,29 +22,32 @@
     slot.date.to_date == @date.to_date &&
     slot.duration == @duration &&
     !Booking.exists?(available_slot_id: slot.id)
-  end.group_by(&:time_frame) %>
+  end.sort_by(&:time_frame) %>
 
   <div class="slots-list">
-  <% if filtered_slots.present? %>
-      <% filtered_slots.each do |time_frame, slots| %>
+    <% if filtered_slots.present? %>
+      <% filtered_slots.group_by(&:time_frame).each do |time_frame, slots| %>
         <% unbooked_slot = slots.find { |slot| !Booking.exists?(available_slot_id: slot.id) } %>
         <% next unless unbooked_slot %>
 
         <div class="slot-element">
           <div class="time-frame"><%= unbooked_slot.time_frame %> (<%= humanized_money_with_symbol(unbooked_slot.price) %>)</div>
-          <%= link_to "Book a slot", new_festival_booking_path(festival_id: @festival.id,
-            booking_date: unbooked_slot.date, start_time: unbooked_slot.start_time,
-            duration: unbooked_slot.duration, available_slot_id: unbooked_slot.id,
-            love_pod: unbooked_slot.love_pod, slots_sku: unbooked_slot.sku, amount: unbooked_slot.price ),
-            class: 'butt button-green'%>
+          <%= link_to "Book a slot", new_festival_booking_path(
+            festival_id: @festival.id,
+            booking_date: unbooked_slot.date,
+            start_time: unbooked_slot.start_time,
+            duration: unbooked_slot.duration,
+            available_slot_id: unbooked_slot.id,
+            love_pod: unbooked_slot.love_pod,
+            slots_sku: unbooked_slot.sku,
+            amount: unbooked_slot.price
+          ), class: 'butt button-green' %>
         </div>
-
       <% end %>
+    <% else %>
+      <p>No available slots for the selected date and duration.</p>
+    <% end %>
   </div>
-
-  <% else %>
-    <p>No available time slots for the selected date and duration.</p>
-  <% end %>
 <% else %>
   <p>No available time slots for the selected date and duration.</p>
 <% end %>

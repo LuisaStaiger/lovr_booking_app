@@ -1,5 +1,4 @@
 class FestivalsController < ApplicationController
-  # skip_before_action :authenticate_user!, only: [:index], if: -> { action_name == 'index' && controller_name == 'festivals' }
   skip_before_action :authenticate_user!, only: [:index, :show, :check_availability]
   before_action :set_festival, only: [:edit, :update, :destroy, :show, :check_availability]
   before_action :set_available_slots, only: [:check_availability, :update]
@@ -44,9 +43,16 @@ class FestivalsController < ApplicationController
   end
 
   def check_availability
-    @festival = Festival.find(params[:id])
     @date = params[:booking_date]
     @duration = params[:duration].to_i
+
+    @start_date = @festival.start_date
+    @end_date = @festival.end_date
+    @date_options = []
+    (@start_date..@end_date).each_with_index do |date, index|
+      @date_options << ["Day #{index + 1} (#{date.strftime('%a %d %b %Y')})", date.to_s]
+    end
+
     if @date.present? && @duration.present?
       @festival_slots
     else
@@ -62,9 +68,7 @@ class FestivalsController < ApplicationController
   end
 
   def set_available_slots
-    @festival_slots = AvailableSlot.all.select do |slot|
-      slot.festival = @festival
-    end
+    @festival_slots = AvailableSlot.where(festival: @festival)
   end
 
   def update_available_slots(festival)
