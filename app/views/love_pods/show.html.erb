@@ -20,5 +20,9 @@
     <strong>Availability time frame:</strong>
     <%= @love_pod.availabilty_start_time.strftime("%H:%M") %> - <%= @love_pod.availabilty_end_time.strftime("%H:%M")  %>
   </p>
-<%= link_to 'Back to festival', festival_path(@festival), class: 'butt button-white' %>
+
+  <div class="butt-list">
+    <%= link_to 'Back to festival', festival_path(@festival), class: 'butt button-white' %>
+    <%= link_to 'Back to my bookings', user_bookings_path, class: 'butt button-white' %>
+  </div>
 </div>
