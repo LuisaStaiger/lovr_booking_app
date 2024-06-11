@@ -1,7 +1,8 @@
-<h1 class="page-title">Festivals</h1>
-<div class="festivals-list">
+<!--<h1 class="page-title">Festivals</h1>-->
+
+<div class="cards-list">
   <% @festivals.each do |festival| %>
-    <div class="card festival">
+    <div class="card card-spacing">
       <h2 class="festival-name"><%= link_to festival.name, festival_path(festival) %></h2>
       <div class="festival-description">
           <% if festival.photo.attached? %>

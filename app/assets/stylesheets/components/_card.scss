@@ -5,3 +5,22 @@
   box-shadow: 0 2px 4px rgba(0,0,0,.1);
   padding: 5vw;
 }
+
+.cards-list {
+
+  .card-spacing {
+    padding: 4vw;
+    margin-bottom: 3vh;
+  }
+
+  h2 {
+    margin-top: 1vh;
+    text-align: center;
+  }
+
+  img {
+    width: 100%;
+    border-radius: 20px;
+    margin-block: 1vh;
+  }
+}
