@@ -1,32 +1,38 @@
-<div class="card">
-  <% if @love_pod.photo.attached? %>
-    <%= cl_image_tag(@love_pod.photo.key) %>
-  <% else %>
-    <%= cl_image_tag(@love_pod.image_url) %>
-  <% end %>
-  <h2><%= @love_pod.name %></h1>
+<% if user_signed_in? && current_user.admin? %>
 
-  <p>
-    <strong>Description:</strong>
-    <%= @love_pod.description %>
-  </p>
+  <div class="card">
+    <% if @love_pod.photo.attached? %>
+      <%= cl_image_tag(@love_pod.photo.key) %>
+    <% else %>
+      <%= cl_image_tag(@love_pod.image_url) %>
+    <% end %>
+    <h2><%= @love_pod.name %></h1>
 
-  <p>
-    <strong>Capacity:</strong>
-    <%= @love_pod.capacity %>
-  </p>
+    <p>
+      <strong>Description:</strong>
+      <%= @love_pod.description %>
+    </p>
 
-  <p>
-    <strong>Availability time frame:</strong>
-    <%= @love_pod.availabilty_start_time.strftime("%H:%M") %> - <%= @love_pod.availabilty_end_time.strftime("%H:%M")  %>
-  </p>
+    <p>
+      <strong>Capacity:</strong>
+      <%= @love_pod.capacity %>
+    </p>
 
-  <div class="butt-list">
-    <%= link_to 'Edit', edit_love_pod_path(@love_pod), class: 'butt button-blue' %>
-    <%= link_to 'Delete', love_pod_path(@love_pod),
-                method: :delete,
-                data: { confirm: 'Are you sure?' },
-                class: 'butt button-blue' %>
-    <%= link_to 'Back to Love Pods', love_pods_path, class: 'butt button-white' %>
+    <p>
+      <strong>Availability time frame:</strong>
+      <%= @love_pod.availabilty_start_time.strftime("%H:%M") %> - <%= @love_pod.availabilty_end_time.strftime("%H:%M")  %>
+    </p>
+
+    <div class="butt-list">
+      <%= link_to 'Edit', edit_love_pod_path(@love_pod), class: 'butt button-blue' %>
+      <%= link_to 'Delete', love_pod_path(@love_pod),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' },
+                  class: 'butt button-blue' %>
+      <%= link_to 'Back to Love Pods', love_pods_path, class: 'butt button-white' %>
+    </div>
   </div>
-</div>
+
+<% else %>
+  <p>You are not authorized to see this page.</p>
+<% end %>

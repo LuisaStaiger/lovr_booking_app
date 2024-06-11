@@ -7,6 +7,7 @@
     <p><strong>Love Pod:</strong> <%= link_to booking.available_slot.love_pod.name,
                                   festival_love_pod_path(booking.available_slot.festival.id, booking.available_slot.love_pod) %></p>
     <p><strong>Price:</strong> <%= humanized_money_with_symbol(booking.amount) %></p>
+    <p><strong>ID:</strong> <%= booking.id %></p>
     <p><strong>Status: <span class="confirmed-status"><%= booking.status %></span></strong></p>
 
     <div>

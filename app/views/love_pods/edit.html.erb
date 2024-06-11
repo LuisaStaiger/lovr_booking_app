@@ -1,49 +1,55 @@
-<h1>New Love Pod</h1>
+<% if user_signed_in? && current_user.admin? %>
 
-<%= form_with(model: @love_pod, local: true) do |form| %>
-  <% if @love_pod.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@love_pod.errors.count, "error") %> prohibited this love pod from being saved:</h2>
-      <ul>
-        <% @love_pod.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+  <h1>New Love Pod</h1>
+
+  <%= form_with(model: @love_pod, local: true) do |form| %>
+    <% if @love_pod.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@love_pod.errors.count, "error") %> prohibited this love pod from being saved:</h2>
+        <ul>
+          <% @love_pod.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :name, 'Name' %>
+      <%= form.text_field :name, id: :love_pod_name, class: 'form-control' %>
+    </div>
+
+    <div class="field">
+      <%= form.label :description, 'Description' %>
+      <%= form.text_area :description, id: :love_pod_description, class: 'form-control' %>
+    </div>
+
+    <div class="field">
+      <%= form.label :capacity, 'Capacity' %>
+      <%= form.number_field :capacity, id: :love_pod_capacity, class: 'form-control' %>
+    </div>
+
+    <div class="field">
+      <%= form.label :availabilty_start_time, 'Available from ' %>
+      <%= form.time_field :availabilty_start_time, id: :love_pod_availabilty_start_time, class: 'form-control', value: form.object.availabilty_start_time.strftime('%H:%M'),
+        min: 'hh:mm:ss',
+        max: 'hh:mm:ss'%>
+    </div>
+
+    <div class="field">
+      <%= form.label :availabilty_end_time, 'until' %>
+      <%= form.time_field :availabilty_end_time, id: :love_pod_availabilty_end_time, class: 'form-control', value: form.object.availabilty_end_time.strftime('%H:%M'),
+        min: 'hh:mm:ss',
+        max: 'hh:mm:ss' %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit 'Create Love Pod', class: 'btn btn-primary' %>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name, 'Name' %>
-    <%= form.text_field :name, id: :love_pod_name, class: 'form-control' %>
-  </div>
+  <%= link_to 'Back to Love Pods', love_pods_path, class: 'btn btn-link' %>
 
-  <div class="field">
-    <%= form.label :description, 'Description' %>
-    <%= form.text_area :description, id: :love_pod_description, class: 'form-control' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :capacity, 'Capacity' %>
-    <%= form.number_field :capacity, id: :love_pod_capacity, class: 'form-control' %>
-  </div>
-
-  <div class="field">
-    <%= form.label :availabilty_start_time, 'Available from ' %>
-    <%= form.time_field :availabilty_start_time, id: :love_pod_availabilty_start_time, class: 'form-control', value: form.object.availabilty_start_time.strftime('%H:%M'),
-      min: 'hh:mm:ss',
-      max: 'hh:mm:ss'%>
-  </div>
-
-  <div class="field">
-    <%= form.label :availabilty_end_time, 'until' %>
-    <%= form.time_field :availabilty_end_time, id: :love_pod_availabilty_end_time, class: 'form-control', value: form.object.availabilty_end_time.strftime('%H:%M'),
-      min: 'hh:mm:ss',
-      max: 'hh:mm:ss' %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit 'Create Love Pod', class: 'btn btn-primary' %>
-  </div>
+<% else %>
+  <p>You are not authorized to see this page.</p>
 <% end %>
-
-<%= link_to 'Back to Love Pods', love_pods_path, class: 'btn btn-link' %>
