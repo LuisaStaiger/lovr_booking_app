@@ -1,32 +1,24 @@
-<h1>Love Pods</h1>
-
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Capacity</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @love_pods.each do |love_pod| %>
-      <tr>
-        <td><%= love_pod.name %></td>
-        <td><%= love_pod.description %></td>
-        <td><%= love_pod.capacity %></td>
-        <td>
-          <%= link_to 'Show', show_from_index_love_pod_path(love_pod), class: 'btn btn-info' %>
-          <%= link_to 'Edit', edit_love_pod_path(love_pod), class: 'btn btn-warning' %>
-          <%= link_to 'Delete', love_pod_path(love_pod), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
 <% if current_user.admin? %>
-  <%= link_to 'New Love Pod', new_love_pod_path, class: 'btn btn-primary' %>
+  <div class="button-top">
+    <%= link_to 'New love pod', new_love_pod_path, class: 'butt button-pink' %>
+  </div>
 <% end %>
 
+<div class="cards-list">
+  <% @love_pods.each do |love_pod| %>
+    <div class="card card-spacing">
+      <% if love_pod.photo.attached? %>
+        <%= link_to cl_image_tag(love_pod.photo.key), show_from_index_love_pod_path(love_pod) %>
+      <% else %>
+        <%= link_to cl_image_tag(love_pod.image_url), show_from_index_love_pod_path(love_pod) %>
+      <% end %>
+      <h3><%= link_to love_pod.name, show_from_index_love_pod_path(love_pod) %></h3>
+      <p><%= love_pod.description %></p>
 
+      <div class="butt-list">
+        <%= link_to 'Edit', edit_love_pod_path(love_pod), class: 'butt button-white' %>
+        <%= link_to 'Delete', love_pod_path(love_pod), method: :delete, data: { confirm: 'Are you sure?' }, class: 'butt button-white' %>
+      </div>
+    </div>
+  <% end %>
+</div>
