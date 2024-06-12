@@ -1,0 +1,30 @@
+<% if user_signed_in? && current_user.admin? %>
+
+  <div class="booking-container">
+    <% if @confirmed_bookings.any? && @pending_bookings.any? %>
+
+    <h1 class="page-title">All confirmed bookings</h1>
+      <%= render "user_bookings/confirmed_booking_details" %>
+    <h3>All pending bookings</h3>
+      <%= render "user_bookings/pending_booking_details" %>
+
+    <% elsif @confirmed_bookings.any? %>
+      <h1 class="page-title">All confirmed bookings</h1>
+      <%= render "user_bookings/confirmed_booking_details" %>
+
+    <% elsif @pending_bookings.any? %>
+      <h3>All pending bookings</h3>
+      <%= render "user_bookings/pending_booking_details" %>
+
+    <% else %>
+      <p class="grey-text">There is no bookings yet.</p>
+    <% end %>
+
+<!--  <h3>My past bookings</h3>
+    <p>You don't have any past bookings.</p>-->
+  </div>
+
+
+<% else %>
+  <p>You are not authorized to see this page.</p>
+<% end %>

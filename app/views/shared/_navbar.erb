@@ -9,11 +9,13 @@
     <ul class="navbar-nav ml-auto">
       <li class="nav-item"><%= link_to 'Festivals', root_path, class: 'nav-link' %></li>
       <% if user_signed_in? %>
-      <li class="nav-item"><%= link_to 'My bookings', user_bookings_path, class: 'nav-link' %></li>
         <% if current_user.admin? %>
           <li class="nav-item"><%= link_to 'Love Pods', love_pods_path, class: 'nav-link' %></li>
+          <li class="nav-item"><%= link_to 'See all bookings', bookings_path, class: 'nav-link' %></li>
           <li class="nav-item"><%= link_to 'Add a new festival',  new_festival_path, class: 'nav-link' %></li>
           <li class="nav-item"><%= link_to 'Add a new Love Pod',  new_love_pod_path, class: 'nav-link'%></li>
+          <% else %>
+          <li class="nav-item"><%= link_to 'My bookings', user_bookings_path, class: 'nav-link' %></li>
         <% end %>
           <li class="nav-item"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-link' %></li>
       <% else %>

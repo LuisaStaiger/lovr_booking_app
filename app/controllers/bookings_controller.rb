@@ -1,6 +1,12 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:show, :destroy, :checkout]
 
+  def index
+    @bookings = Booking.all
+    @confirmed_bookings = @bookings.where(status: 1)
+    @pending_bookings = @bookings.where(status: 0)
+  end
+
   def new
     @festival = Festival.find(params[:festival_id])
     @booking = Booking.new(

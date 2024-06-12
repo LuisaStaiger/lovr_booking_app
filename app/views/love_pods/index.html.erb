@@ -1,24 +1,28 @@
-<% if current_user.admin? %>
+<% if user_signed_in? && current_user.admin? %>
+
   <div class="button-top">
     <%= link_to 'New love pod', new_love_pod_path, class: 'butt button-pink' %>
   </div>
-<% end %>
 
-<div class="cards-list">
-  <% @love_pods.each do |love_pod| %>
-    <div class="card card-spacing">
-      <% if love_pod.photo.attached? %>
-        <%= link_to cl_image_tag(love_pod.photo.key), show_from_index_love_pod_path(love_pod) %>
-      <% else %>
-        <%= link_to cl_image_tag(love_pod.image_url), show_from_index_love_pod_path(love_pod) %>
-      <% end %>
-      <h3><%= link_to love_pod.name, show_from_index_love_pod_path(love_pod) %></h3>
-      <p><%= love_pod.description %></p>
+  <div class="cards-list">
+    <% @love_pods.each do |love_pod| %>
+      <div class="card card-spacing">
+        <% if love_pod.photo.attached? %>
+          <%= link_to cl_image_tag(love_pod.photo.key), show_from_index_love_pod_path(love_pod) %>
+        <% else %>
+          <%= link_to cl_image_tag(love_pod.image_url), show_from_index_love_pod_path(love_pod) %>
+        <% end %>
+        <h3><%= link_to love_pod.name, show_from_index_love_pod_path(love_pod) %></h3>
+        <p><%= love_pod.description %></p>
 
-      <div class="butt-list">
-        <%= link_to 'Edit', edit_love_pod_path(love_pod), class: 'butt button-white' %>
-        <%= link_to 'Delete', love_pod_path(love_pod), method: :delete, data: { confirm: 'Are you sure?' }, class: 'butt button-white' %>
+        <div class="butt-list">
+          <%= link_to 'Edit', edit_love_pod_path(love_pod), class: 'butt button-white' %>
+          <%= link_to 'Delete', love_pod_path(love_pod), method: :delete, data: { confirm: 'Are you sure?' }, class: 'butt button-white' %>
+        </div>
       </div>
-    </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
+
+<% else %>
+  <p>You are not authorized to see this page.</p>
+<% end %>
