@@ -13,36 +13,54 @@
   <% end %>
 </div>
 
-
 <%# Displaying the available slots %>
 <% if @date.present? && @duration.present? && @festival_slots.present? %>
   <h3>Available time slots on <%= Date.parse(@date).strftime('%a %d %b %Y') %>:</h3>
 
   <% filtered_slots = @festival_slots.select do |slot|
     slot.date.to_date == @date.to_date &&
-    slot.duration == @duration &&
-    !Booking.exists?(available_slot_id: slot.id)
+    slot.duration == @duration
   end.sort_by(&:time_frame) %>
 
-  <div class="slots-list">
-    <% if filtered_slots.present? %>
-      <% filtered_slots.group_by(&:time_frame).each do |time_frame, slots| %>
-        <% unbooked_slot = slots.find { |slot| !Booking.exists?(available_slot_id: slot.id) } %>
-        <% next unless unbooked_slot %>
+  <% booked_slots = @festival_slots.select do |slot|
+    Booking.exists?(available_slot_id: slot.id)
+  end %>
 
-        <div class="slot-element">
-          <div class="time-frame"><%= unbooked_slot.time_frame %> (<%= humanized_money_with_symbol(unbooked_slot.price) %>)</div>
-          <%= link_to "Book a slot", new_festival_booking_path(
-            festival_id: @festival.id,
-            booking_date: unbooked_slot.date,
-            start_time: unbooked_slot.start_time,
-            duration: unbooked_slot.duration,
-            available_slot_id: unbooked_slot.id,
-            love_pod: unbooked_slot.love_pod,
-            slots_sku: unbooked_slot.sku,
-            amount: unbooked_slot.price
-          ), class: 'butt button-green' %>
-        </div>
+  <% free_slots = filtered_slots.reject do |filtered|
+      booked_slots.any? do |booked|
+      (booked.duration == 55 && filtered.duration == 25 &&
+      booked.date == filtered.date &&
+      booked.love_pod == filtered.love_pod &&
+      booked.start_time + 30.minutes == filtered.start_time) ||
+
+      (booked.date == filtered.date &&
+      booked.love_pod == filtered.love_pod &&
+      booked.start_time == filtered.start_time)
+    end
+  end %>
+
+  <% unique_free_slots = free_slots.group_by(&:time_frame).map do |time_frame, slots|
+    slots.first
+  end %>
+
+  <div class="slots-list">
+    <% if unique_free_slots.present? %>
+      <% unique_free_slots.group_by(&:time_frame).each do |time_frame, slots| %>
+        <% slots.each do |slot| %>
+          <div class="slot-element">
+            <div class="time-frame"><%= slot.time_frame %> (<%= humanized_money_with_symbol(slot.price) %>)</div>
+            <%= link_to "Book a slot", new_festival_booking_path(
+              festival_id: @festival.id,
+              booking_date: slot.date,
+              start_time: slot.start_time,
+              duration: slot.duration,
+              available_slot_id: slot.id,
+              love_pod: slot.love_pod,
+              slots_sku: slot.sku,
+              amount: slot.price
+            ), class: 'butt button-green' %>
+          </div>
+        <% end %>
       <% end %>
     <% else %>
       <p class="grey-text">No available slots for the selected date and duration.</p>
