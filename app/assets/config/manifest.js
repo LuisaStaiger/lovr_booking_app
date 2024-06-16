@@ -3,3 +3,6 @@
 //= link_tree ../../javascript .js
 //= link_tree ../../../vendor/javascript .js
 //= link rails-ujs.js
+// app/assets/config/manifest.js
+// ...
+//= link manifest.json

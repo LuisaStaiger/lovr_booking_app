@@ -11,13 +11,14 @@ LOV+R is a web-based booking platform designed to transform festivals into unfor
 
 Through LOV+R, we aim to enhance the festival experience, making it more enjoyable and memorable for everyone involved.
 
-# GETTING STARTED 
+
+# GETTING STARTED
 Ensure you have the following installed on your local development machine:
 - Ruby 3.1.2
 - Rails 7.1.3.2
 - PostgreSQL
 
-# INSTALLATION 
+# INSTALLATION
 1. Clone the repository
   `git clone https://github.com/yourgithubusername/lovr_booking_app.git`
   `git clone https://github.com/yourgithubusername/lovr_booking_app.git`
