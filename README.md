@@ -4,19 +4,28 @@ This project is developed and maintained by Louise-Giraud and LuisaStaiger.
 
 LOV+R is a web-based booking platform designed to transform festivals into unforgettable, love-filled experiences. Our innovative platform allows festival organizers to set up Love Pods, unique spaces that can be added to any festival.
 
+See more about LOV+R: https://wearelovr.com
+
 # FEATURES
-- Festival and Love Pod Setup: Festival organizers can easily set up festivals and add Love Pods to them. Each Love Pod is a unique space within the festival, offering a different experience.
-- Viewing and Booking: Users can browse through the various festivals, view the Love Pods available in each festival, and check the available slots. They can then book a slot in a Love Pod of their choice.
-- Integrated Payment System: Our platform integrates with Stripe, allowing users to make seamless reservations for their chosen Love Pod slots.
+As a user (festival guest)
+- I can book a free love pod at the festival I'm attending.
+- I can also see my bookings details and them.
 
-Through LOV+R, we aim to enhance the festival experience, making it more enjoyable and memorable for everyone involved.
+As an admin 
+- I can add new festivals and love pods to the app
+- I can also update festivals and love pods details or delete them 
+- I can see all the bookings and delete them.
 
+The app has an integrated payment system (Stripe).
+The images are hosted in Cloudinary.
 
 # GETTING STARTED
 Ensure you have the following installed on your local development machine:
 - Ruby 3.1.2
 - Rails 7.1.3.2
 - PostgreSQL
+- Node.js and Yarn
+- ngrok
 
 # INSTALLATION
 1. Clone the repository
@@ -47,5 +56,14 @@ Ensure you have the following installed on your local development machine:
 
 6. Run the server
   `rails s`
-
+   
 You should now be able to access the app at http://localhost:3000
+
+### Configure a webhook with nrok
+
+1. In a new terminal window, start ngrok to tunnel HTTP traffic on port 3000 
+  `ngrok http 3000`
+
+2. Configure the webhook in Stripe `LINK/stripe-webhook` and listen to the 'checkout.session.completed' event
+  
+3. Add the link in development.rb `config.hosts << LINK`
