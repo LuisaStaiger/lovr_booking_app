@@ -1,9 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  festival: one
+chill_zone:
+  name: "Chill Zone"
+  description: "A relaxing space for festival-goers to unwind."
+  capacity: 2
+  image_url: 'https://res.cloudinary.com/dnx58st8e/image/upload/v1716803091/round_igj3nt.jpg'
 
-two:
-  name: MyString
-  festival: two
+dance_sphere:
+  name: "Dance Sphere"
+  description: "An energetic area for dancing and music."
+  capacity: 2
+  image_url: 'https://res.cloudinary.com/dnx58st8e/image/upload/v1716803091/round_igj3nt.jpg'

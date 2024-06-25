@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  location: MyString
-  start_date: 2024-04-08
-  end_date: 2024-04-08
+summer_fest:
+  name: "Summer Music Fest"
+  location: "Central Park"
+  start_date: 2024-06-10
+  end_date: 2024-06-12
 
-two:
-  name: MyString
-  location: MyString
-  start_date: 2024-04-08
-  end_date: 2024-04-08
+winter_fest:
+  name: "Winter Art Festival"
+  location: "Downtown Gallery"
+  start_date: 2024-12-05
+  end_date: 2024-12-08
