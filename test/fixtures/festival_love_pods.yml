@@ -4,8 +4,14 @@
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+festival_pod_one:
+  love_pod: chill_zone
+  festival: summer_fest
+
+festival_pod_two:
+  love_pod: dance_sphere
+  festival: summer_fest
+
+festival_pod_three:
+  love_pod: dance_sphere
+  festival: winter_fest
